@@ -24,7 +24,7 @@ Importante: os dados ficam no app instalado. Se você abrir o link no Safari em 
 - **Hábitos:** grade do mês; toque nos quadradinhos. Água e corrida abrem o painel de quantidade.
 - **Mês:** calendário (toque num dia para abrir), eventos e tarefas do mês.
 - **Futuro:** o que é para os próximos 6 meses. **Migração:** na virada do mês, o Hoje avisa; decida o destino de cada tarefa aberta.
-- **Ajustes (⚙):** hábitos (criar, editar, ordenar, arquivar), backup e legenda dos símbolos.
+- **Ajustes (⚙):** hábitos (criar, editar, ordenar, arquivar e excluir; excluir fica no fim do painel de editar e na lista de arquivados), backup e legenda dos símbolos.
 
 ## Rotina de backup (importante)
 
@@ -69,3 +69,4 @@ Puxada de [ideias-futuras.md](ideias-futuras.md). Ordem sugerida pelo uso diári
 
 - 16/11/2026: v1 dada como concluída pelo usuário depois de instalar e testar no iPhone (offline, backup, teclado e datas ok). Nenhuma etapa do workflow foi apontada como travada ou sobrando.
 - Ajuste pós-publicação pedido pelo usuário: no Hoje, os hábitos passaram a ficar em lista vertical (um embaixo do outro) em vez de uma fileira com rolagem lateral.
+- Ajuste pós-v1 pedido pelo usuário (tarefa 8.0): opção de **excluir hábito**, com confirmação, contagem dos dias que serão apagados e "Desfazer". PRD e tarefas atualizados antes de construir; 4 testes novos (56 no total).

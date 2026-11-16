@@ -22,6 +22,10 @@
   text-underline-offset: 3px;
 }
 
+.link--perigo {
+  color: var(--destaque);
+}
+
 .bloco {
   display: flex;
   flex-direction: column;
@@ -796,6 +800,18 @@
 }
 
 .arquivados[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.confirmar-exclusao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+}
+
+.confirmar-exclusao__botoes {
   display: flex;
   flex-direction: column;
   gap: 8px;

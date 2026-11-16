@@ -50,6 +50,11 @@
   color: var(--destaque);
 }
 
+/* Ação destrutiva discreta (ex.: "Excluir hábito" no fim de um painel). */
+.botao--texto-perigo {
+  color: var(--destaque);
+}
+
 .botao--cheio {
   width: 100%;
 }

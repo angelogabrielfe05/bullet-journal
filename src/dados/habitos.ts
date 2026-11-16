@@ -33,6 +33,41 @@ export async function arquivarHabito(id: string, arquivado = true) {
   await db.habitos.update(id, { arquivado })
 }
 
+/** O que foi apagado ao excluir um hábito, para o "Desfazer" devolver tudo. */
+export interface HabitoExcluido {
+  habito: Habito
+  registros: RegistroHabito[]
+}
+
+/** Quantos dias têm alguma marcação (check feito ou quantidade maior que zero). */
+export async function contarDiasRegistrados(habitoId: string): Promise<number> {
+  return db.registros
+    .where('habitoId')
+    .equals(habitoId)
+    .filter((r) => !!r.feito || (r.quantidade ?? 0) > 0)
+    .count()
+}
+
+/** Apaga o hábito e todos os registros dele, de todos os meses. */
+export async function excluirHabito(id: string): Promise<HabitoExcluido | undefined> {
+  return db.transaction('rw', db.habitos, db.registros, async () => {
+    const habito = await db.habitos.get(id)
+    if (!habito) return undefined
+    const registros = await db.registros.where('habitoId').equals(id).toArray()
+    await db.registros.where('habitoId').equals(id).delete()
+    await db.habitos.delete(id)
+    return { habito, registros }
+  })
+}
+
+/** Desfaz a exclusão: devolve o hábito (na mesma posição) e os registros. */
+export async function restaurarHabito({ habito, registros }: HabitoExcluido) {
+  await db.transaction('rw', db.habitos, db.registros, async () => {
+    await db.habitos.put(habito)
+    await db.registros.bulkPut(registros)
+  })
+}
+
 export async function reordenarHabitos(ids: string[]) {
   await db.transaction('rw', db.habitos, async () => {
     await Promise.all(ids.map((id, ordem) => db.habitos.update(id, { ordem })))

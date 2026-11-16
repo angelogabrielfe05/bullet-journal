@@ -9,7 +9,8 @@ import { PainelInferior } from '../componentes/PainelInferior'
 import { SecaoBackup } from '../componentes/SecaoBackup'
 import { MarcaPrioridade, Simbolo } from '../componentes/Simbolo'
 import { LEGENDA } from '../componentes/simbolosTexto'
-import { arquivarHabito, listarHabitos, reordenarHabitos } from '../dados/habitos'
+import { ConfirmarExclusao } from '../componentes/ConfirmarExclusao'
+import { arquivarHabito, excluirHabito, listarHabitos, reordenarHabitos, restaurarHabito } from '../dados/habitos'
 import type { Habito } from '../dados/tipos'
 import { formatarNumero } from '../regras/numeros'
 
@@ -31,6 +32,7 @@ function descreverHabito(h: Habito) {
 export function Ajustes() {
   const todos = useLiveQuery(() => listarHabitos(true), [])
   const [editando, setEditando] = useState<Habito | 'novo' | null>(null)
+  const [excluindo, setExcluindo] = useState<Habito | null>(null)
   const avisar = useAviso()
 
   const ativos = todos?.filter((h) => !h.arquivado) ?? []
@@ -48,6 +50,22 @@ export function Ajustes() {
   async function arquivar(h: Habito) {
     await arquivarHabito(h.id, true)
     avisar({ texto: `“${h.nome}” arquivado`, acao: { rotulo: 'Desfazer', aoClicar: () => void arquivarHabito(h.id, false) } })
+  }
+
+  async function excluir(h: Habito) {
+    setExcluindo(null)
+    const excluido = await excluirHabito(h.id)
+    if (!excluido) return
+    avisar({
+      texto: `“${h.nome}” excluído`,
+      acao: { rotulo: 'Desfazer', aoClicar: () => void restaurarHabito(excluido) },
+      duracao: 8000,
+    })
+  }
+
+  async function arquivarEmVezDeExcluir(h: Habito) {
+    setExcluindo(null)
+    await arquivar(h)
   }
 
   return (
@@ -105,9 +123,14 @@ export function Ajustes() {
                     <strong>{h.nome}</strong>
                     <span>{descreverHabito(h)}</span>
                   </div>
-                  <button type="button" className="link" onClick={() => arquivarHabito(h.id, false)}>
-                    reativar
-                  </button>
+                  <div className="lista-ajustes__acoes">
+                    <button type="button" className="link" onClick={() => arquivarHabito(h.id, false)}>
+                      reativar
+                    </button>
+                    <button type="button" className="link link--perigo" onClick={() => setExcluindo(h)}>
+                      excluir
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -148,6 +171,26 @@ export function Ajustes() {
             key={editando === 'novo' ? 'novo' : editando.id}
             habito={editando === 'novo' ? undefined : editando}
             aoTerminar={() => setEditando(null)}
+            aoExcluir={
+              editando === 'novo'
+                ? undefined
+                : () => {
+                    setEditando(null)
+                    setExcluindo(editando)
+                  }
+            }
+          />
+        )}
+      </PainelInferior>
+
+      <PainelInferior aberto={excluindo !== null} aoFechar={() => setExcluindo(null)} titulo="Excluir hábito">
+        {excluindo && (
+          <ConfirmarExclusao
+            key={excluindo.id}
+            habito={excluindo}
+            aoExcluir={() => excluir(excluindo)}
+            aoArquivar={excluindo.arquivado ? undefined : () => arquivarEmVezDeExcluir(excluindo)}
+            aoCancelar={() => setExcluindo(null)}
           />
         )}
       </PainelInferior>

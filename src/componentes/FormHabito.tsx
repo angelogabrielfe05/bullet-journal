@@ -20,10 +20,12 @@ interface Props {
   /** Hábito a editar; sem ele, cria um novo. */
   habito?: Habito
   aoTerminar: () => void
+  /** Se vier, mostra "Excluir hábito" no fim (só ao editar). */
+  aoExcluir?: () => void
 }
 
 /** Formulário de criar/editar hábito (vai dentro de um PainelInferior). */
-export function FormHabito({ habito, aoTerminar }: Props) {
+export function FormHabito({ habito, aoTerminar, aoExcluir }: Props) {
   const [nome, setNome] = useState(habito?.nome ?? '')
   const [tipo, setTipo] = useState<TipoHabito>(habito?.tipo ?? 'check')
   const [unidade, setUnidade] = useState(habito?.unidade ?? '')
@@ -126,6 +128,12 @@ export function FormHabito({ habito, aoTerminar }: Props) {
       <Botao type="submit" variante="primario" cheio>
         {habito ? 'Salvar alterações' : 'Criar hábito'}
       </Botao>
+
+      {habito && aoExcluir && (
+        <Botao variante="fantasma" cheio className="botao--texto-perigo" onClick={aoExcluir}>
+          Excluir hábito
+        </Botao>
+      )}
     </form>
   )
 }

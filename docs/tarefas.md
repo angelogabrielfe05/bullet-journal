@@ -90,3 +90,11 @@
 - [x] 7.7 Abrir o link publicado e conferir que funciona
 - [x] 7.8 Instalar no iPhone (Compartilhar → Adicionar à Tela de Início) e testar offline no aparelho
 - [x] 7.9 Commit final e `docs/proximos-passos.md`
+
+## 8.0 Ajuste pós-v1: excluir hábito (pedido em 16/11/2026)
+
+- [x] 8.1 Registrar no PRD e nas tarefas
+- [x] 8.2 Dados: excluir o hábito com todos os registros (em uma transação), contar os dias registrados e restaurar tudo no "Desfazer", com testes
+- [x] 8.3 Tela: "Excluir hábito" no painel de editar e na lista de arquivados, com painel de confirmação e aviso com "Desfazer"
+- [x] 8.4 Conferir no navegador em largura de celular (excluir, desfazer, cancelar) e rodar testes, lint e build
+- [x] 8.5 Commit e publicação

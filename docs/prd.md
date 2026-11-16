@@ -76,7 +76,7 @@ Navegação por uma barra fixa embaixo com 4 abas: **Hoje · Hábitos · Mês ·
 | Água | Quantidade | 2.000 ml | todos os dias |
 | Corrida | Quantidade | 5 km | ter, qui, sáb |
 
-- Em Ajustes: criar, editar (nome, tipo, unidade, meta, dias da semana), reordenar e arquivar hábitos. Arquivar esconde o hábito sem apagar o histórico.
+- Em Ajustes: criar, editar (nome, tipo, unidade, meta, dias da semana), reordenar, arquivar e excluir hábitos. Arquivar esconde o hábito sem apagar o histórico. Excluir apaga o hábito e todas as marcações dele, com confirmação (mostra quantos dias serão perdidos) e "Desfazer" por alguns segundos. *(Excluir acrescentado em 16/11/2026, a pedido do usuário, depois da v1.)*
 
 ### 5.3 Mês (calendário + tarefas)
 
