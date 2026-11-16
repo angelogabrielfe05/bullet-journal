@@ -323,37 +323,27 @@
 
 .faixa-habitos {
   display: flex;
-  gap: 8px;
-  margin: 0 -16px;
-  padding: 2px 16px 6px;
-  overflow-x: auto;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
   list-style: none;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-}
-
-.faixa-habitos::-webkit-scrollbar {
-  display: none;
-}
-
-.faixa-habitos > li {
-  flex: none;
-  scroll-snap-align: start;
 }
 
 .chip-habito {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  width: 100%;
   min-height: var(--toque);
   padding: 0 14px 0 10px;
   overflow: hidden;
   border: 1.5px solid var(--linha);
-  border-radius: 999px;
+  border-radius: 12px;
   background: var(--papel);
   font-weight: 550;
-  white-space: nowrap;
+  text-align: left;
 }
 
 .chip-habito[aria-pressed='true'],
@@ -370,7 +360,8 @@
   border-radius: 6px;
 }
 
-.chip-habito[aria-pressed='true'] .chip-habito__caixa {
+.chip-habito[aria-pressed='true'] .chip-habito__caixa,
+.chip-habito[data-ok] .chip-habito__caixa {
   border-color: var(--tinta);
   background: var(--tinta);
   color: var(--papel);
@@ -378,12 +369,6 @@
 
 /* Quantidade: o fundo do chip enche conforme a meta do dia. */
 .chip-habito--quantidade {
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0;
-  padding: 2px 16px;
-  border-radius: 14px;
   line-height: 18px;
 }
 
@@ -401,17 +386,20 @@
   background: #e8e2d4;
 }
 
+.chip-habito__caixa,
 .chip-habito__nome,
 .chip-habito__valor {
   position: relative;
 }
 
 .chip-habito__nome {
-  font-size: var(--texto-pequeno);
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .chip-habito__valor {
-  font-size: 0.75rem;
+  font-size: var(--texto-pequeno);
   font-weight: 500;
   color: var(--tinta-suave);
   font-variant-numeric: tabular-nums;

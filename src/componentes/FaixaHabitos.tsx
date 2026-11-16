@@ -9,7 +9,15 @@ import { irPara } from '../navegacao'
 import { formatarNumero } from '../regras/numeros'
 import { PainelQuantidade } from './PainelQuantidade'
 
-/** Faixa compacta com os hábitos que valem no dia, para marcar sem sair do Hoje. */
+function Visto() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m3 8.5 3.2 3L13 4.5" />
+    </svg>
+  )
+}
+
+/** Lista dos hábitos que valem no dia (um embaixo do outro), para marcar sem sair do Hoje. */
 export function FaixaHabitos({ dia }: { dia: Dia }) {
   const habitos = useLiveQuery(() => listarHabitos(), [])
   const registros = useLiveQuery(() => db.registros.where('dia').equals(dia).toArray(), [dia])
@@ -40,13 +48,9 @@ export function FaixaHabitos({ dia }: { dia: Dia }) {
               <li key={h.id}>
                 <button type="button" className="chip-habito" aria-pressed={ok} onClick={() => alternarCheck(h.id, dia)}>
                   <span className="chip-habito__caixa" aria-hidden="true">
-                    {ok && (
-                      <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="m3 8.5 3.2 3L13 4.5" />
-                      </svg>
-                    )}
+                    {ok && <Visto />}
                   </span>
-                  {h.nome}
+                  <span className="chip-habito__nome">{h.nome}</span>
                 </button>
               </li>
             )
@@ -62,6 +66,9 @@ export function FaixaHabitos({ dia }: { dia: Dia }) {
                 onClick={() => setHabitoAberto(h)}
                 style={{ '--fracao': fracao } as CSSProperties}
               >
+                <span className="chip-habito__caixa" aria-hidden="true">
+                  {ok && <Visto />}
+                </span>
                 <span className="chip-habito__nome">{h.nome}</span>
                 <span className="chip-habito__valor">
                   {formatarNumero(registro?.quantidade ?? 0)}/{formatarNumero(h.meta ?? 0)} {h.unidade}
