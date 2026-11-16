@@ -1,6 +1,6 @@
 # Revisão e testes — Bullet Journal v1
 
-> Documento da Etapa 5. Feito em 16/11/2026, antes da publicação.
+> Documento da Etapa 5. Feito em 16/11/2026, antes da publicação. Aprovado para publicar em 16/11/2026.
 
 ## 1. Testes automáticos
 
@@ -53,7 +53,7 @@ Também nesta etapa: ícone do app (192, 512, maskable, iPhone 180 px e favicon)
 
 ## 5. Pendências conhecidas
 
-Itens da revisão **não corrigidos** (aguardando decisão: corrigir agora ou ir para `ideias-futuras.md`):
+Itens da revisão **não corrigidos**: por decisão de 16/11/2026, foram para [ideias-futuras.md](ideias-futuras.md) (v2). Nenhum perde dados nem trava o uso.
 
 - **#6 (parte 2) Histórico da escala dos hábitos:** guardar `escalas: [{desde, dias}]` para que mudar os dias não reescreva o passado. Mudança de modelo de dados.
 - **#9 Avisos com desfazer em fila:** se duas ações acontecem em menos de 5 s, o desfazer da primeira some.
