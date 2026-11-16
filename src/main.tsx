@@ -4,6 +4,7 @@ import App from './App.tsx'
 import { iniciarDados } from './dados/iniciar'
 import './estilos/base.css'
 import './estilos/componentes.css'
+import './estilos/telas.css'
 
 void iniciarDados()
 

@@ -42,19 +42,19 @@
 
 ## 4.0 Tela Hoje
 
-- [ ] 4.1 Cabeçalho com a data por extenso, setas de dia anterior/seguinte e botão "hoje"
-- [ ] 4.2 Lista de itens do dia vinda do banco
-- [ ] 4.3 Campo de adicionar rápido com seletor de símbolo (• ○ –), prioridade (*) e atalhos de digitação (`-`, `o `, `*`)
-- [ ] 4.4 Horário opcional em eventos
-- [ ] 4.5 Tocar no símbolo para concluir/desfazer; tocar no texto para editar; menu do item (trocar símbolo, prioridade, apagar com desfazer)
-- [ ] 4.6 Recuar e desfazer o recuo (subitem, 1 nível)
-- [ ] 4.7 Reordenar arrastando (com toque)
-- [ ] 4.8 Bloco "Pendentes de dias anteriores" com migrar, agendar (escolha do mês) e descartar
-- [ ] 4.9 Faixa "Hábitos de hoje" com check e soma rápida de quantidade
-- [ ] 4.10 Reflexão do dia com salvamento automático
-- [ ] 4.11 Aviso de backup (mais de 7 dias) e aviso de migração mensal (quando houver tarefas abertas do mês anterior)
-- [ ] 4.12 Conferir: fluxo completo de um dia em 375 px, recarregando a página para ver que nada se perde
-- [ ] 4.13 Commit: "Tela Hoje"
+- [x] 4.1 Cabeçalho com a data por extenso, setas de dia anterior/seguinte e botão "hoje"
+- [x] 4.2 Lista de itens do dia vinda do banco
+- [x] 4.3 Campo de adicionar rápido com seletor de símbolo (• ○ –), prioridade (*) e atalhos de digitação (`-`, `o `, `*`)
+- [x] 4.4 Horário opcional em eventos
+- [x] 4.5 Tocar no símbolo para concluir/desfazer; tocar no texto para editar; menu do item (trocar símbolo, prioridade, apagar com desfazer)
+- [x] 4.6 Recuar e desfazer o recuo (subitem, 1 nível)
+- [x] 4.7 Reordenar arrastando (com toque)
+- [x] 4.8 Bloco "Pendentes de dias anteriores" com migrar, agendar (escolha do mês) e descartar
+- [x] 4.9 Faixa "Hábitos de hoje" com check e soma rápida de quantidade
+- [x] 4.10 Reflexão do dia com salvamento automático
+- [x] 4.11 Aviso de backup (mais de 7 dias) e aviso de migração mensal (quando houver tarefas abertas do mês anterior)
+- [x] 4.12 Conferir: fluxo completo de um dia em 375 px, recarregando a página para ver que nada se perde
+- [x] 4.13 Commit: "Tela Hoje"
 
 ## 5.0 Hábitos e Ajustes
 

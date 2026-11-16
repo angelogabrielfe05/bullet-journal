@@ -1,0 +1,510 @@
+/* ------------------------------------------------------------------ */
+/* Peças gerais de tela                                                */
+/* ------------------------------------------------------------------ */
+
+.botao--pequeno {
+  min-height: 40px;
+  padding: 0 12px;
+  font-size: 0.875rem;
+  gap: 6px;
+}
+
+.link {
+  min-height: var(--toque);
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--tinta-suave);
+  font-size: var(--texto-pequeno);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+.bloco {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+}
+
+.bloco__cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bloco__cabecalho--linha {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bloco__titulo {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--subtitulo);
+  line-height: calc(var(--grade) * 1.5);
+}
+
+.bloco__contagem {
+  font-family: var(--fonte-texto);
+  font-size: var(--texto-pequeno);
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.bloco__ajuda {
+  font-size: var(--texto-pequeno);
+  line-height: 20px;
+  color: var(--tinta-suave);
+}
+
+.recados {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+}
+
+.opcao__icone {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.opcao__mes::first-letter {
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ */
+/* Navegação entre dias                                                */
+/* ------------------------------------------------------------------ */
+
+.navegacao-dia {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: calc(var(--meia-grade) * -1);
+}
+
+.navegacao-dia .botao-simbolo {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.navegacao-dia__data {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: calc(var(--grade) * 1.5);
+}
+
+.navegacao-dia__hoje {
+  flex-basis: 100%;
+  min-height: 32px;
+  color: var(--destaque);
+}
+
+/* ------------------------------------------------------------------ */
+/* Lista de bullets: partes interativas                                */
+/* ------------------------------------------------------------------ */
+
+.bullet {
+  position: relative;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.bullet[data-arrastando] {
+  z-index: 2;
+  background: var(--papel-painel);
+  box-shadow: var(--sombra);
+}
+
+.bullet__texto {
+  min-height: var(--grade);
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: text;
+}
+
+.bullet__edicao {
+  width: 100%;
+  min-width: 0;
+  margin: -6px 0;
+  padding: 5px 8px;
+  border: 1.5px solid var(--tinta);
+  border-radius: 8px;
+  background: #fff;
+  font-size: var(--texto);
+  line-height: var(--grade);
+}
+
+.bullet__edicao:focus {
+  outline: none;
+}
+
+.bullet__destino {
+  font-size: var(--texto-pequeno);
+  color: var(--tinta-apagada);
+  white-space: nowrap;
+}
+
+.bullet__acoes {
+  display: flex;
+  gap: 0;
+}
+
+.bullet__menu {
+  color: var(--tinta-suave);
+}
+
+.bullet__alca {
+  color: var(--tinta-apagada);
+  touch-action: none; /* o dedo arrasta o item em vez de rolar a página */
+  cursor: grab;
+}
+
+.bullet__alca:active {
+  cursor: grabbing;
+}
+
+.menu-item__texto {
+  padding: 0 2px;
+  color: var(--tinta-suave);
+  overflow-wrap: anywhere;
+}
+
+.menu-item__horario {
+  display: flex;
+  align-items: center;
+  gap: var(--meia-grade);
+  font-weight: 600;
+}
+
+.menu-item__horario .campo__entrada {
+  width: auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Adicionar item                                                      */
+/* ------------------------------------------------------------------ */
+
+.adicionar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.adicionar__simbolos {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adicionar__simbolo {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 36px;
+  border: 1.5px solid var(--linha);
+  border-radius: 8px;
+  background: var(--papel);
+  color: var(--tinta-suave);
+}
+
+.adicionar__simbolo[aria-pressed='true'] {
+  border-color: var(--tinta);
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.adicionar__simbolo--prioridade[aria-pressed='true'] {
+  border-color: var(--destaque);
+  background: var(--destaque-fundo);
+}
+
+.adicionar__simbolo--prioridade[aria-pressed='true'] .marca-prioridade {
+  color: var(--destaque);
+}
+
+.adicionar__horario {
+  height: 36px;
+  margin-left: auto;
+  padding: 0 8px;
+  border: 1.5px solid var(--linha);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.55);
+  font-size: var(--texto);
+}
+
+.adicionar__linha {
+  display: flex;
+  gap: 8px;
+}
+
+.adicionar__texto {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Pendentes                                                           */
+/* ------------------------------------------------------------------ */
+
+.bloco--pendentes {
+  padding: var(--meia-grade) 14px;
+  border: 1.5px dashed var(--ponto);
+  border-radius: var(--raio);
+  background: rgb(255 255 255 / 0.4);
+}
+
+.pendentes {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pendente {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--meia-grade) 0;
+}
+
+.pendente + .pendente {
+  border-top: 1px solid var(--linha);
+}
+
+.pendente__linha {
+  display: grid;
+  grid-template-columns: 14px 20px minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: 8px;
+}
+
+.pendente__linha > .simbolo {
+  margin-top: 2px;
+}
+
+.pendente__texto {
+  overflow-wrap: anywhere;
+}
+
+.pendente__data {
+  font-size: var(--texto-pequeno);
+  color: var(--tinta-suave);
+  white-space: nowrap;
+}
+
+.pendente__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pendente__acoes .botao--pequeno {
+  padding: 0 10px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Faixa de hábitos do dia                                             */
+/* ------------------------------------------------------------------ */
+
+.faixa-habitos {
+  display: flex;
+  gap: 8px;
+  margin: 0 -16px;
+  padding: 2px 16px 6px;
+  overflow-x: auto;
+  list-style: none;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.faixa-habitos::-webkit-scrollbar {
+  display: none;
+}
+
+.faixa-habitos > li {
+  flex: none;
+  scroll-snap-align: start;
+}
+
+.chip-habito {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--toque);
+  padding: 0 14px 0 10px;
+  overflow: hidden;
+  border: 1.5px solid var(--linha);
+  border-radius: 999px;
+  background: var(--papel);
+  font-weight: 550;
+  white-space: nowrap;
+}
+
+.chip-habito[aria-pressed='true'],
+.chip-habito[data-ok] {
+  border-color: var(--tinta);
+}
+
+.chip-habito__caixa {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1.8px solid var(--tinta-suave);
+  border-radius: 6px;
+}
+
+.chip-habito[aria-pressed='true'] .chip-habito__caixa {
+  border-color: var(--tinta);
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+/* Quantidade: o fundo do chip enche conforme a meta do dia. */
+.chip-habito--quantidade {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  padding: 2px 16px;
+  border-radius: 14px;
+  line-height: 18px;
+}
+
+.chip-habito--quantidade::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: calc(var(--fracao, 0) * 100%);
+  background: var(--papel-painel);
+  transition: width 0.25s ease;
+}
+
+.chip-habito--quantidade[data-ok]::before {
+  background: #e8e2d4;
+}
+
+.chip-habito__nome,
+.chip-habito__valor {
+  position: relative;
+}
+
+.chip-habito__nome {
+  font-size: var(--texto-pequeno);
+}
+
+.chip-habito__valor {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--tinta-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ */
+/* Painel de quantidade                                                */
+/* ------------------------------------------------------------------ */
+
+.quantidade {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+}
+
+.quantidade__dia {
+  font-size: var(--texto-pequeno);
+  color: var(--tinta-suave);
+}
+
+.quantidade__total {
+  font-size: 1.125rem;
+}
+
+.quantidade__total strong {
+  font-size: 1.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.quantidade__meta-ok {
+  font-size: var(--texto-pequeno);
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.barra-progresso {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--papel);
+  border: 1px solid var(--linha);
+}
+
+.barra-progresso__preenchido {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--tinta);
+  transition: width 0.25s ease;
+}
+
+.quantidade__rapidos,
+.quantidade__botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quantidade__livre {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+}
+
+/* ------------------------------------------------------------------ */
+/* Agendar                                                             */
+/* ------------------------------------------------------------------ */
+
+.agendar__dia {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.agendar__dia .campo {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Reflexão                                                            */
+/* ------------------------------------------------------------------ */
+
+.reflexao__situacao {
+  font-size: 0.75rem;
+  color: var(--tinta-suave);
+}
+
+.reflexao__campo .campo__entrada {
+  min-height: calc(var(--grade) * 4);
+  background: rgb(255 255 255 / 0.35);
+  border-style: dashed;
+}

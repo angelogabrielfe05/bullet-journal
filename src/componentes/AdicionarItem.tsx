@@ -1,0 +1,112 @@
+import { useRef, useState, type FormEvent } from 'react'
+import { criarItem, type Lista } from '../dados/itens'
+import type { TipoItem } from '../dados/tipos'
+import { interpretarAtalho } from '../regras/atalhos'
+import { IconeMais } from './Icones'
+import { MarcaPrioridade, Simbolo } from './Simbolo'
+
+const TIPOS: { tipo: TipoItem; nome: string }[] = [
+  { tipo: 'tarefa', nome: 'Tarefa' },
+  { tipo: 'evento', nome: 'Evento' },
+  { tipo: 'nota', nome: 'Nota' },
+]
+
+interface Props {
+  lista: Lista
+  /** Texto de exemplo no campo. */
+  dica?: string
+}
+
+/**
+ * Campo de anotação rápida no fim da lista. Escolha o símbolo nos botões
+ * ou use os atalhos: "-" nota, "o " evento, "*" prioridade.
+ */
+export function AdicionarItem({ lista, dica = 'Anotar…  ( - nota · o evento )' }: Props) {
+  const [tipoEscolhido, setTipoEscolhido] = useState<TipoItem>('tarefa')
+  const [prioridadeEscolhida, setPrioridadeEscolhida] = useState(false)
+  const [texto, setTexto] = useState('')
+  const [horario, setHorario] = useState('')
+  const campo = useRef<HTMLInputElement>(null)
+
+  // O atalho digitado aparece na hora nos botões de símbolo.
+  const atalho = interpretarAtalho(texto)
+  const tipo = atalho.tipo ?? tipoEscolhido
+  const prioridade = prioridadeEscolhida || atalho.prioridade
+
+  async function adicionar(e: FormEvent) {
+    e.preventDefault()
+    if (!atalho.texto) return
+    await criarItem({
+      tipo,
+      texto: atalho.texto,
+      lista,
+      prioridade,
+      horario: tipo === 'evento' && horario ? horario : undefined,
+    })
+    setTexto('')
+    setHorario('')
+    setTipoEscolhido('tarefa')
+    setPrioridadeEscolhida(false)
+    campo.current?.focus()
+  }
+
+  return (
+    <form className="adicionar" onSubmit={adicionar}>
+      <div className="adicionar__simbolos" role="group" aria-label="Tipo do item">
+        {TIPOS.map(({ tipo: t, nome }) => (
+          <button
+            key={t}
+            type="button"
+            className="adicionar__simbolo"
+            aria-pressed={tipo === t}
+            aria-label={nome}
+            title={nome}
+            onClick={() => {
+              setTipoEscolhido(t)
+              campo.current?.focus()
+            }}
+          >
+            <Simbolo tipo={t} tamanho={18} />
+          </button>
+        ))}
+        <button
+          type="button"
+          className="adicionar__simbolo adicionar__simbolo--prioridade"
+          aria-pressed={prioridade}
+          aria-label="Prioridade"
+          title="Prioridade"
+          onClick={() => {
+            setPrioridadeEscolhida(!prioridadeEscolhida)
+            campo.current?.focus()
+          }}
+        >
+          <MarcaPrioridade />
+        </button>
+        {tipo === 'evento' && (
+          <input
+            type="time"
+            className="adicionar__horario"
+            aria-label="Horário do evento (opcional)"
+            value={horario}
+            onChange={(e) => setHorario(e.target.value)}
+          />
+        )}
+      </div>
+      <div className="adicionar__linha">
+        <input
+          ref={campo}
+          className="campo__entrada adicionar__texto"
+          aria-label="Novo item"
+          placeholder={dica}
+          value={texto}
+          enterKeyHint="enter"
+          autoComplete="off"
+          onChange={(e) => setTexto(e.target.value)}
+        />
+        <button type="submit" className="botao botao--primario botao--icone" aria-label="Adicionar" disabled={!atalho.texto}>
+          <IconeMais />
+        </button>
+      </div>
+    </form>
+  )
+}

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { db } from './banco'
+import { db, lerAjuste } from './banco'
 import { alternarCheck, definirQuantidade, listarHabitos, registrosDoMes, somarQuantidade } from './habitos'
 import {
   alternarConcluida,
@@ -85,7 +85,10 @@ describe('itens', () => {
 describe('hábitos', () => {
   it('cria os 5 hábitos iniciais uma única vez', async () => {
     await garantirDadosIniciais(HOJE)
+    const primeiroUso = await lerAjuste<string>('primeiroUso')
+    expect(primeiroUso).toBeTruthy()
     await garantirDadosIniciais(HOJE)
+    expect(await lerAjuste('primeiroUso')).toBe(primeiroUso) // não muda na 2ª abertura
     const habitos = await listarHabitos()
     expect(habitos.map((h) => h.nome)).toEqual(['Academia', 'Leitura', 'Estudo', 'Água', 'Corrida'])
     expect(habitos.find((h) => h.nome === 'Água')).toMatchObject({ meta: 2000, unidade: 'ml' })

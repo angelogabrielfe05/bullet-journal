@@ -92,6 +92,7 @@ export interface Reflexao {
 
 /** Preferências e marcadores internos do app (chave → valor). */
 export interface Ajuste {
-  chave: 'semeado' | 'ultimoBackup'
+  /** primeiroUso: quando o app foi aberto pela 1ª vez (para o aviso de backup). */
+  chave: 'semeado' | 'ultimoBackup' | 'primeiroUso'
   valor: string | boolean
 }

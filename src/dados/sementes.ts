@@ -1,5 +1,5 @@
 import { hoje, type Dia } from '../regras/datas'
-import { db, lerAjuste, novoId, salvarAjuste } from './banco'
+import { agoraISO, db, lerAjuste, novoId, salvarAjuste } from './banco'
 import type { Habito } from './tipos'
 
 const TODOS_OS_DIAS = [0, 1, 2, 3, 4, 5, 6]
@@ -12,6 +12,7 @@ const TER_QUI_SAB = [2, 4, 6]
  */
 export async function garantirDadosIniciais(inicio: Dia = hoje()): Promise<void> {
   await db.transaction('rw', db.habitos, db.ajustes, async () => {
+    if (!(await lerAjuste('primeiroUso'))) await salvarAjuste('primeiroUso', agoraISO())
     if (await lerAjuste<boolean>('semeado')) return
 
     const base = { inicio, arquivado: false }

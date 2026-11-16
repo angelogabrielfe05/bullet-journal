@@ -9,6 +9,11 @@ export type Aba = 'hoje' | 'habitos' | 'mes' | 'futuro'
 /** "amostra" é a página de amostra do visual, só no modo de desenvolvimento. */
 export type Tela = Aba | 'ajustes' | 'migracao' | 'amostra'
 
+/** Toda tela recebe o parâmetro do endereço, ex.: a data em #/hoje/2026-11-14 */
+export interface PropsTela {
+  parametro?: string
+}
+
 export interface Rota {
   tela: Tela
   /** Parâmetro opcional, ex.: a data do dia em #/hoje/2026-11-16 */

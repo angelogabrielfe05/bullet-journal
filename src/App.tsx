@@ -1,7 +1,7 @@
 import { lazy, Suspense, type ComponentType } from 'react'
 import { ProvedorAviso } from './componentes/Aviso'
 import { BarraAbas } from './componentes/BarraAbas'
-import { useRota, type Tela } from './navegacao'
+import { useRota, type PropsTela, type Tela } from './navegacao'
 import { Ajustes } from './telas/Ajustes'
 import { Futuro } from './telas/Futuro'
 import { Habitos } from './telas/Habitos'
@@ -12,7 +12,7 @@ import { Migracao } from './telas/Migracao'
 // A amostra do visual só existe no modo de desenvolvimento (não vai para o app publicado).
 const Amostra = import.meta.env.DEV ? lazy(() => import('./telas/Amostra')) : Hoje
 
-const TELAS: Record<Tela, ComponentType> = {
+const TELAS: Record<Tela, ComponentType<PropsTela>> = {
   hoje: Hoje,
   habitos: Habitos,
   mes: Mes,
@@ -30,7 +30,7 @@ export default function App() {
       <div className="app">
         <main className="app__conteudo">
           <Suspense fallback={null}>
-            <TelaAtual />
+            <TelaAtual parametro={rota.parametro} />
           </Suspense>
         </main>
         <BarraAbas telaAtual={rota.tela} />
