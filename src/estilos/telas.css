@@ -508,3 +508,430 @@
   background: rgb(255 255 255 / 0.35);
   border-style: dashed;
 }
+
+.navegacao-dia__data--mes::first-letter {
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ */
+/* Grade de hábitos                                                    */
+/* ------------------------------------------------------------------ */
+
+.grade {
+  --coluna-nome: 116px;
+  --coluna-dia: 34px;
+  margin: 0 -16px;
+  overflow-x: auto;
+  /* A rolagem encaixa no começo de um dia, sem quadradinho cortado. */
+  scroll-snap-type: x proximity;
+  scroll-padding-left: var(--coluna-nome);
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.grade:focus-visible {
+  outline-offset: -2px;
+}
+
+.grade__tabela {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0 16px 0 0;
+}
+
+.grade__canto,
+.grade__habito {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  width: var(--coluna-nome);
+  min-width: var(--coluna-nome);
+  max-width: var(--coluna-nome);
+  padding: 0 8px 0 16px;
+  background: var(--papel);
+  border-right: 1.5px dashed var(--linha);
+  text-align: left;
+}
+
+.grade__habito {
+  height: 60px;
+  font-weight: 400;
+  border-top: 1px solid var(--linha);
+}
+
+.grade__nome {
+  display: block;
+  overflow: hidden;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.grade__resumo,
+.grade__sequencia {
+  display: block;
+  font-size: 0.6875rem;
+  line-height: 14px;
+  color: var(--tinta-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.grade__sequencia {
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.grade__dia {
+  scroll-snap-align: start;
+  width: var(--coluna-dia);
+  min-width: var(--coluna-dia);
+  height: 44px;
+  padding: 0;
+  font-size: var(--texto-pequeno);
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  vertical-align: bottom;
+  padding-bottom: 6px;
+}
+
+.grade__inicial {
+  display: block;
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: var(--tinta-suave);
+}
+
+.grade__dia[data-fds] {
+  color: var(--tinta-suave);
+}
+
+.grade__dia[data-hoje] {
+  color: var(--destaque);
+}
+
+.grade__dia[data-hoje] > span:last-child {
+  display: inline-block;
+  min-width: 24px;
+  border-radius: 999px;
+  background: var(--destaque);
+  color: #fff;
+}
+
+.grade__celula {
+  padding: 0;
+  text-align: center;
+  border-top: 1px solid var(--linha);
+}
+
+.grade__celula[data-hoje] {
+  background: rgb(176 63 40 / 0.06);
+}
+
+/* Célula: quadradinho de caderno */
+.celula {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  overflow: hidden;
+  vertical-align: middle;
+  border: 1.5px solid var(--tinta-suave);
+  border-radius: 6px;
+  background: rgb(255 255 255 / 0.5);
+  color: var(--papel);
+}
+
+button.celula {
+  cursor: pointer;
+}
+
+button.celula:active {
+  transform: scale(0.92);
+}
+
+.celula:disabled {
+  border-style: dashed;
+  border-color: var(--ponto);
+  background: transparent;
+  cursor: default;
+}
+
+/* Parcial: enche de baixo para cima conforme a meta */
+.celula::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: calc(var(--fracao, 0) * 100%);
+  background: var(--tinta-apagada);
+}
+
+.celula[data-estado='feito'] {
+  border-color: var(--tinta);
+  background: var(--tinta);
+}
+
+.celula[data-estado='feito']::before {
+  display: none;
+}
+
+.celula > svg {
+  position: relative;
+}
+
+/* Fora da escala: só um pontinho apagado */
+.celula--fora {
+  border: 0;
+  background: none;
+}
+
+.celula--fora::before {
+  inset: 50% auto auto 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ponto);
+  transform: translate(-50%, -50%);
+}
+
+.legenda-grade {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--meia-grade);
+}
+
+.legenda-grade__itens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--texto-pequeno);
+  color: var(--tinta-suave);
+}
+
+.legenda-grade__itens li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legenda-grade__itens .celula {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ajustes                                                             */
+/* ------------------------------------------------------------------ */
+
+.lista-ajustes {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--raio);
+  background: rgb(255 255 255 / 0.45);
+  border: 1px solid var(--linha);
+}
+
+.lista-ajustes__item {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 8px;
+  padding: 8px 8px 8px 14px;
+}
+
+.lista-ajustes__item + .lista-ajustes__item {
+  border-top: 1px solid var(--linha);
+}
+
+.lista-ajustes > .vazio {
+  padding: var(--meia-grade) 14px;
+}
+
+.lista-ajustes__texto {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.lista-ajustes__texto span {
+  font-size: var(--texto-pequeno);
+  line-height: 18px;
+  color: var(--tinta-suave);
+}
+
+.lista-ajustes__acoes {
+  display: flex;
+  flex: none;
+  align-items: center;
+  margin-left: auto;
+}
+
+.lista-ajustes__acoes .botao-simbolo {
+  width: 34px;
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--tinta-suave);
+}
+
+.lista-ajustes__acoes .botao-simbolo:disabled {
+  opacity: 0.3;
+}
+
+.arquivados summary {
+  min-height: var(--toque);
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  cursor: pointer;
+}
+
+.arquivados[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ajustes__info {
+  font-size: 0.9375rem;
+}
+
+.ajustes__botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ajustes__rodape {
+  text-align: center;
+}
+
+.legenda-simbolos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: var(--meia-grade) 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legenda-simbolos li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legenda-simbolos__riscado {
+  color: var(--tinta-apagada);
+  text-decoration: line-through;
+}
+
+.importar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+}
+
+.importar__resumo {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* Formulário de hábito */
+.form-habito {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+}
+
+.form-habito__grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.form-habito__quantidade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--meia-grade);
+}
+
+.form-habito__incrementos {
+  grid-column: 1 / -1;
+}
+
+.form-habito__atalhos {
+  display: flex;
+  gap: 12px;
+}
+
+.form-habito__erro {
+  color: var(--destaque);
+  font-weight: 600;
+}
+
+.segmentado {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 3px;
+  border-radius: var(--raio);
+  background: var(--papel);
+  border: 1px solid var(--linha);
+}
+
+.segmentado button {
+  min-height: 40px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.segmentado button[aria-pressed='true'] {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.dias-semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.dias-semana button {
+  height: var(--toque);
+  border: 1.5px solid var(--linha);
+  border-radius: 50%;
+  background: var(--papel);
+  font-weight: 700;
+  color: var(--tinta-suave);
+  aspect-ratio: 1;
+  justify-self: center;
+  width: 100%;
+  max-width: var(--toque);
+}
+
+.dias-semana button[aria-pressed='true'] {
+  border-color: var(--tinta);
+  background: var(--tinta);
+  color: var(--papel);
+}

@@ -50,9 +50,10 @@ export const formatarDiaExtenso = (dia: Dia): string =>
 export const formatarMes = (mes: Mes): string =>
   format(inicioDoMes(mes), "MMMM 'de' yyyy", { locale: ptBR })
 
+const DIAS_CURTOS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb']
+
 /** "sáb, 14" */
-export const formatarDiaCurto = (dia: Dia): string =>
-  format(parseISO(dia), 'EEE, d', { locale: ptBR })
+export const formatarDiaCurto = (dia: Dia): string => `${DIAS_CURTOS[diaDaSemana(dia)]}, ${Number(dia.slice(8))}`
 
 /** "14/11" */
 export const formatarDiaNumerico = (dia: Dia): string => format(parseISO(dia), 'dd/MM')

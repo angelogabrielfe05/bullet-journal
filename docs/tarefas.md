@@ -58,14 +58,14 @@
 
 ## 5.0 Hábitos e Ajustes
 
-- [ ] 5.1 Grade do mês: hábitos nas linhas, dias nas colunas, rolagem horizontal confortável no celular, setas de mês
-- [ ] 5.2 Células: dia fora da escala apagado, check simples, preenchimento parcial para quantidade
-- [ ] 5.3 Painel de quantidade (+250 / +500 ml, campo livre para km, zerar)
-- [ ] 5.4 Progresso do mês e sequência ao lado de cada hábito
-- [ ] 5.5 Ajustes, hábitos: criar, editar (nome, tipo, unidade, meta, dias), reordenar e arquivar
-- [ ] 5.6 Ajustes, backup: exportar arquivo, importar com resumo e confirmação, "último backup há X dias"
-- [ ] 5.7 Conferir: marcar hábitos em vários dias e conferir progresso e sequência; backup ida e volta no navegador
-- [ ] 5.8 Commit: "Hábitos e Ajustes"
+- [x] 5.1 Grade do mês: hábitos nas linhas, dias nas colunas, rolagem horizontal confortável no celular, setas de mês
+- [x] 5.2 Células: dia fora da escala apagado, check simples, preenchimento parcial para quantidade
+- [x] 5.3 Painel de quantidade (+250 / +500 ml, campo livre para km, zerar)
+- [x] 5.4 Progresso do mês e sequência ao lado de cada hábito
+- [x] 5.5 Ajustes, hábitos: criar, editar (nome, tipo, unidade, meta, dias), reordenar e arquivar
+- [x] 5.6 Ajustes, backup: exportar arquivo, importar com resumo e confirmação, "último backup há X dias"
+- [x] 5.7 Conferir: marcar hábitos em vários dias e conferir progresso e sequência; backup ida e volta no navegador
+- [x] 5.8 Commit: "Hábitos e Ajustes"
 
 ## 6.0 Mês, Futuro e Migração
 

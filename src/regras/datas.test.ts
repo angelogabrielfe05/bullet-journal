@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   diaDaSemana,
   diasDoMes,
+  formatarDiaCurto,
   formatarDiaExtenso,
   formatarMes,
   mesDoDia,
@@ -35,6 +36,8 @@ describe('datas', () => {
     expect(formatarDiaExtenso('2026-11-16')).toBe('segunda, 16 de novembro')
     expect(formatarDiaExtenso('2026-11-14')).toBe('sábado, 14 de novembro')
     expect(formatarMes('2026-11')).toBe('novembro de 2026')
+    expect(formatarDiaCurto('2026-11-14')).toBe('sáb, 14')
+    expect(formatarDiaCurto('2026-11-02')).toBe('seg, 2')
     expect(mesDoDia('2026-11-16')).toBe('2026-11')
   })
 })
