@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { irPara } from '../navegacao'
+import { IconeAjustes } from './Icones'
 
 interface Props {
   titulo: string
@@ -21,7 +22,7 @@ export function Pagina({ titulo, children, semAjustes }: Props) {
             aria-label="Ajustes"
             onClick={() => irPara('ajustes')}
           >
-            ⚙
+            <IconeAjustes tamanho={22} />
           </button>
         )}
       </header>

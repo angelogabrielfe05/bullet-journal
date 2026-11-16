@@ -1,0 +1,435 @@
+/* ------------------------------------------------------------------ */
+/* Botões                                                              */
+/* ------------------------------------------------------------------ */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--toque);
+  padding: 0 18px;
+  border: 1.5px solid transparent;
+  border-radius: var(--raio);
+  font-weight: 600;
+  line-height: 1.2;
+  transition: transform 0.08s ease, background-color 0.15s ease;
+}
+
+.botao:active {
+  transform: scale(0.97);
+}
+
+.botao:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.botao--primario {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.botao--secundario {
+  background: var(--papel);
+  border-color: var(--tinta);
+}
+
+.botao--fantasma {
+  background: none;
+  color: var(--tinta-suave);
+}
+
+.botao--fantasma:active {
+  background: var(--papel-painel);
+}
+
+.botao--perigo {
+  background: var(--papel);
+  border-color: var(--destaque);
+  color: var(--destaque);
+}
+
+.botao--cheio {
+  width: 100%;
+}
+
+.botao--icone {
+  width: var(--toque);
+  padding: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Campos de texto                                                     */
+/* ------------------------------------------------------------------ */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.campo__rotulo {
+  font-size: var(--texto-pequeno);
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.campo__entrada {
+  width: 100%;
+  min-height: var(--toque);
+  padding: 10px 12px;
+  border: 1.5px solid var(--linha);
+  border-radius: var(--raio);
+  background: rgb(255 255 255 / 0.55);
+  font-size: var(--texto); /* 16 px: o iPhone não dá zoom ao tocar */
+  line-height: var(--grade);
+}
+
+.campo__entrada::placeholder {
+  color: var(--tinta-apagada);
+}
+
+.campo__entrada:focus {
+  outline: none;
+  border-color: var(--tinta);
+  background: #fff;
+}
+
+.campo__entrada--area {
+  resize: none;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------ */
+/* Símbolos do método                                                  */
+/* ------------------------------------------------------------------ */
+
+.simbolo {
+  display: block;
+  flex: none;
+}
+
+.simbolo[data-estado='descartada'] {
+  color: var(--tinta-apagada);
+}
+
+.marca-prioridade {
+  display: block;
+  color: var(--destaque);
+}
+
+/* Botão do símbolo: área de toque de 44 px em volta de um símbolo de 20 px */
+.botao-simbolo {
+  display: grid;
+  place-items: center;
+  width: var(--toque);
+  height: var(--toque);
+  margin: -10px -6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--tinta);
+}
+
+.botao-simbolo:active {
+  background: var(--papel-painel);
+}
+
+/* ------------------------------------------------------------------ */
+/* Linha de bullet (item do registro)                                  */
+/* ------------------------------------------------------------------ */
+
+.lista-bullets {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bullet {
+  display: grid;
+  grid-template-columns: 14px 32px minmax(0, 1fr) auto;
+  align-items: start; /* símbolo alinhado com a 1ª linha do texto, como no papel */
+  column-gap: 2px;
+  min-height: calc(var(--grade) * 2);
+  padding: var(--meia-grade) 0;
+}
+
+.bullet[data-recuo='1'] {
+  padding-left: var(--grade);
+}
+
+.bullet__prioridade,
+.bullet__simbolo,
+.bullet__acoes {
+  display: grid;
+  place-items: center;
+  height: var(--grade);
+}
+
+.bullet__texto {
+  overflow-wrap: anywhere;
+}
+
+.bullet__horario {
+  margin-right: 6px;
+  font-size: var(--texto-pequeno);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--tinta-suave);
+}
+
+.bullet[data-estado='concluida'] .bullet__texto,
+.bullet[data-estado='migrada'] .bullet__texto,
+.bullet[data-estado='agendada'] .bullet__texto {
+  color: var(--tinta-suave);
+}
+
+.bullet[data-estado='descartada'] .bullet__texto {
+  color: var(--tinta-apagada);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+}
+
+.bullet[data-tipo='nota'] .bullet__texto {
+  color: var(--tinta-suave);
+}
+
+.bullet[data-tipo='evento'] .bullet__texto {
+  font-weight: 550;
+}
+
+/* ------------------------------------------------------------------ */
+/* Painel inferior (bottom sheet)                                      */
+/* ------------------------------------------------------------------ */
+
+.painel {
+  width: 100%;
+  max-width: 560px;
+  max-height: 88dvh;
+  margin: auto auto 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--raio-grande) var(--raio-grande) 0 0;
+  background: var(--papel-painel);
+  color: var(--tinta);
+  box-shadow: var(--sombra);
+  overscroll-behavior: contain;
+}
+
+.painel::backdrop {
+  background: rgb(38 36 31 / 0.35);
+}
+
+.painel[open] {
+  animation: painel-sobe 0.22s ease-out;
+}
+
+@keyframes painel-sobe {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .painel[open] {
+    animation: none;
+  }
+}
+
+.painel__conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+  padding: 8px 16px calc(var(--grade) + env(safe-area-inset-bottom));
+}
+
+.painel__alca {
+  align-self: center;
+  width: 40px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--ponto);
+}
+
+.painel__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.painel__titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--subtitulo);
+  line-height: calc(var(--grade) * 1.5);
+}
+
+.painel__fechar {
+  display: grid;
+  place-items: center;
+  width: var(--toque);
+  height: var(--toque);
+  margin-right: -10px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--tinta-suave);
+}
+
+/* Lista de opções dentro do painel (ex.: menu do item) */
+.opcoes {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--raio);
+  background: var(--papel);
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--meia-grade);
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 0;
+  background: none;
+  text-align: left;
+}
+
+.opcoes > li + li .opcao {
+  border-top: 1px solid var(--linha);
+}
+
+.opcao:active {
+  background: var(--papel-painel);
+}
+
+.opcao--perigo {
+  color: var(--destaque);
+}
+
+/* ------------------------------------------------------------------ */
+/* Aviso rápido com "Desfazer" (toast)                                 */
+/* ------------------------------------------------------------------ */
+
+.aviso-area {
+  position: fixed;
+  inset: auto 0 calc(var(--altura-abas) + env(safe-area-inset-bottom) + 12px);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.aviso {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 480px;
+  min-height: 48px;
+  padding: 6px 8px 6px 16px;
+  border-radius: var(--raio);
+  background: var(--tinta);
+  color: var(--papel);
+  box-shadow: var(--sombra);
+  pointer-events: auto;
+  animation: aviso-entra 0.2s ease-out;
+}
+
+@keyframes aviso-entra {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+.aviso__texto {
+  font-size: 0.9375rem;
+}
+
+.aviso__acao {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: #f4b8a8; /* vermelho claro sobre a tinta escura: contraste 9:1 */
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ */
+/* Cartão de aviso fixo dentro da página (ex.: backup, migração)       */
+/* ------------------------------------------------------------------ */
+
+.recado {
+  display: flex;
+  align-items: center;
+  gap: var(--meia-grade);
+  padding: var(--meia-grade) 14px;
+  border: 1.5px dashed var(--destaque);
+  border-radius: var(--raio);
+  background: var(--destaque-fundo);
+}
+
+.recado__texto {
+  flex: 1;
+  font-size: 0.9375rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Página de amostra (só desenvolvimento)                              */
+/* ------------------------------------------------------------------ */
+
+.amostra__secao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+}
+
+.amostra__rotulo {
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.amostra__legenda {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--meia-grade) 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amostra__legenda li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.amostra__riscado {
+  color: var(--tinta-apagada);
+  text-decoration: line-through;
+}
+
+.amostra__linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--meia-grade);
+}
+
+/* Ícones do menu alinhados numa coluna de 20 px */
+.opcao > .marca-prioridade {
+  margin: 0 3px;
+}

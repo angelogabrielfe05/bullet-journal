@@ -6,6 +6,13 @@ App pessoal, instalável no iPhone, no estilo de um bullet journal (método Ryde
 
 TypeScript · React · Vite · Dexie (IndexedDB) · vite-plugin-pwa · dnd-kit · date-fns (pt-BR) · Vitest · GitHub Pages. Detalhes em [docs/stack.md](docs/stack.md).
 
+## Comandos e convenções
+
+- `npm run dev` → http://localhost:5173/bullet-journal/ · `npm test` · `npm run lint` · `npm run build`
+- Amostra do visual (só em desenvolvimento): http://localhost:5173/bullet-journal/#/amostra
+- Pastas: `src/regras` (lógica pura e testada), `src/dados` (banco Dexie e operações), `src/componentes`, `src/telas`, `src/estilos` (cores e medidas em `tokens.css`).
+- Datas como texto local: dia `"2026-11-16"`, mês `"2026-11"`.
+
 ## Documentos
 
 - [docs/prd.md](docs/prd.md): o que a v1 faz e não faz (fonte da verdade do escopo)

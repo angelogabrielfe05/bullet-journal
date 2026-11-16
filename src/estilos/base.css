@@ -1,7 +1,9 @@
-/*
- * Estilo base provisório (tarefa 1). O visual de caderno pontilhado
- * entra na tarefa 3.0 e substitui as cores e fontes daqui.
- */
+@import './tokens.css';
+@import './fontes.css';
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
 
 *,
 *::before,
@@ -9,74 +11,145 @@
   box-sizing: border-box;
 }
 
-:root {
-  --papel: #fbf8f1;
-  --tinta: #2b2a28;
-  --tinta-suave: #8a857b;
-  --linha: #e4dfd3;
-  --altura-abas: 64px;
-  color-scheme: light;
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  color: var(--tinta);
-  background: var(--papel);
+html {
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--papel);
 }
 
+/* Papel pontilhado: um ponto a cada 24 px, rolando junto com a página. */
 body {
   margin: 0;
   min-height: 100dvh;
-  background: var(--papel);
+  font-family: var(--fonte-texto);
+  font-size: var(--texto);
+  line-height: var(--grade);
+  color: var(--tinta);
+  background-color: var(--papel);
+  background-image: radial-gradient(circle, var(--ponto) 1.15px, transparent 1.6px);
+  background-size: var(--grade) var(--grade);
+  background-position: center calc(var(--meia-grade) * -1);
+  font-feature-settings: 'cv11', 'ss01'; /* Inter: "a" e números mais legíveis */
 }
 
-button {
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
   font: inherit;
   color: inherit;
 }
 
+button {
+  cursor: pointer;
+  touch-action: manipulation; /* sem atraso de duplo toque no iPhone */
+}
+
+:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ */
+/* Moldura do app                                                      */
+/* ------------------------------------------------------------------ */
+
 .app__conteudo {
   max-width: 720px;
   margin: 0 auto;
-  padding: 16px 16px calc(var(--altura-abas) + 24px + env(safe-area-inset-bottom));
+  padding: 0 16px calc(var(--altura-abas) + var(--grade) * 2 + env(safe-area-inset-bottom));
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
 }
 
 .pagina__cabecalho {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--meia-grade);
+  min-height: calc(var(--grade) * 3);
   padding-top: env(safe-area-inset-top);
 }
 
 .pagina__titulo {
-  margin: 8px 0;
-  font-size: 1.75rem;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--titulo);
+  line-height: calc(var(--grade) * 2);
+  letter-spacing: 0.01em;
 }
 
 .pagina__ajustes {
-  width: 44px;
-  height: 44px;
+  display: grid;
+  place-items: center;
+  width: var(--toque);
+  height: var(--toque);
+  margin-right: -10px;
   border: 0;
+  border-radius: 50%;
   background: none;
-  font-size: 1.4rem;
-  cursor: pointer;
+  color: var(--tinta-suave);
+}
+
+.pagina__ajustes:active {
+  background: var(--papel-painel);
+}
+
+.pagina__conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grade);
+}
+
+.subtitulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--subtitulo);
+  line-height: calc(var(--grade) * 1.5);
 }
 
 .vazio {
   color: var(--tinta-suave);
 }
 
+/* ------------------------------------------------------------------ */
+/* Barra de abas (rodapé fixo, respeitando a barra de gestos do iPhone) */
+/* ------------------------------------------------------------------ */
+
 .barra-abas {
   position: fixed;
   inset: auto 0 0 0;
+  z-index: 10;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   height: calc(var(--altura-abas) + env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
+  /* No computador, a barra ocupa a largura toda, mas os botões ficam no centro (720 px). */
+  padding: 0 max(8px, env(safe-area-inset-right), calc((100% - 720px) / 2))
+    env(safe-area-inset-bottom) max(8px, env(safe-area-inset-left), calc((100% - 720px) / 2));
   background: var(--papel);
-  border-top: 1px solid var(--linha);
+  border-top: 1.5px dashed var(--linha);
 }
 
 .barra-abas__aba {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,19 +158,35 @@ button {
   border: 0;
   background: none;
   color: var(--tinta-suave);
-  cursor: pointer;
 }
 
 .barra-abas__aba[aria-current='page'] {
   color: var(--tinta);
-  font-weight: 600;
 }
 
-.barra-abas__simbolo {
-  font-size: 1.25rem;
-  line-height: 1;
+/* Aba ativa: um "risco de caneta" em cima do ícone. */
+.barra-abas__aba[aria-current='page']::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  width: 28px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--destaque);
+  transform: rotate(-2deg);
+}
+
+.barra-abas__icone {
+  display: block;
+  margin-top: 6px;
 }
 
 .barra-abas__rotulo {
   font-size: 0.75rem;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.barra-abas__aba[aria-current='page'] .barra-abas__rotulo {
+  font-weight: 650;
 }

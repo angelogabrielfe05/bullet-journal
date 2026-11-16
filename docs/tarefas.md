@@ -31,14 +31,14 @@
 
 ## 3.0 Visual do caderno
 
-- [ ] 3.1 Definir as cores e medidas (papel creme, tinta, destaque, espaçamento) como variáveis de estilo
-- [ ] 3.2 Fundo de papel com grade pontilhada alinhada às linhas do texto
-- [ ] 3.3 Escolher e embutir as fontes (uma para títulos com cara de caderno, uma legível para o texto), funcionando offline
-- [ ] 3.4 Componente de símbolo do bullet (• ○ – * X < > e riscado), grande e fácil de tocar
-- [ ] 3.5 Componentes base: botão, campo de texto, painel que sobe de baixo (bottom sheet), aviso com "desfazer"
-- [ ] 3.6 Ajustar a área segura do iPhone (entalhe e barra inferior) e a barra de abas no estilo caderno
-- [ ] 3.7 Conferir: página de amostra com todos os componentes em 375 px e no computador
-- [ ] 3.8 Commit: "Visual do caderno"
+- [x] 3.1 Definir as cores e medidas (papel creme, tinta, destaque, espaçamento) como variáveis de estilo
+- [x] 3.2 Fundo de papel com grade pontilhada alinhada às linhas do texto
+- [x] 3.3 Escolher e embutir as fontes (uma para títulos com cara de caderno, uma legível para o texto), funcionando offline
+- [x] 3.4 Componente de símbolo do bullet (• ○ – * X < > e riscado), grande e fácil de tocar
+- [x] 3.5 Componentes base: botão, campo de texto, painel que sobe de baixo (bottom sheet), aviso com "desfazer"
+- [x] 3.6 Ajustar a área segura do iPhone (entalhe e barra inferior) e a barra de abas no estilo caderno
+- [x] 3.7 Conferir: página de amostra com todos os componentes em 375 px e no computador
+- [x] 3.8 Commit: "Visual do caderno"
 
 ## 4.0 Tela Hoje
 

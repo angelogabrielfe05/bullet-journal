@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react'
  */
 
 export type Aba = 'hoje' | 'habitos' | 'mes' | 'futuro'
-export type Tela = Aba | 'ajustes' | 'migracao'
+/** "amostra" é a página de amostra do visual, só no modo de desenvolvimento. */
+export type Tela = Aba | 'ajustes' | 'migracao' | 'amostra'
 
 export interface Rota {
   tela: Tela
@@ -14,7 +15,15 @@ export interface Rota {
   parametro?: string
 }
 
-const TELAS: Tela[] = ['hoje', 'habitos', 'mes', 'futuro', 'ajustes', 'migracao']
+const TELAS: Tela[] = [
+  'hoje',
+  'habitos',
+  'mes',
+  'futuro',
+  'ajustes',
+  'migracao',
+  ...(import.meta.env.DEV ? (['amostra'] as const) : []),
+]
 
 export function lerRota(hash: string): Rota {
   const [tela, parametro] = hash.replace(/^#\/?/, '').split('/')

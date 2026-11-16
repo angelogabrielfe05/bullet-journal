@@ -1,0 +1,47 @@
+/*
+ * Cores e medidas do caderno. Toda tela usa estas variáveis,
+ * então mudar o visual é mudar aqui.
+ *
+ * Contraste conferido sobre o papel (mínimo 4,5:1 para texto):
+ * tinta 14,5 · tinta-suave 5,5 · destaque 5,5.
+ * tinta-apagada (2,5) e ponto (1,6) são só decoração.
+ */
+:root {
+  /* Papel */
+  --papel: #faf7f0;
+  --papel-painel: #f2ede2;
+  --ponto: #cfc7b6;
+  --linha: #e2dccf;
+
+  /* Tinta */
+  --tinta: #26241f;
+  --tinta-suave: #69645a;
+  --tinta-apagada: #a39c8e;
+
+  /* Caneta vermelha: prioridade (*), dia de hoje, ações de destaque */
+  --destaque: #b03f28;
+  --destaque-fundo: #f4e1da;
+
+  /* Grade pontilhada: tudo na vertical anda em múltiplos de 12/24 px */
+  --grade: 24px;
+  --meia-grade: 12px;
+
+  /* Tipografia */
+  --fonte-titulo: 'Caveat', 'Bradley Hand', 'Segoe Print', cursive;
+  --fonte-texto: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --texto-pequeno: 0.8125rem; /* 13px */
+  --texto: 1rem; /* 16px: evita o zoom automático do iPhone em campos */
+  --titulo: 2.5rem; /* 40px, Caveat é pequena para o tamanho */
+  --subtitulo: 1.75rem;
+
+  /* Formas */
+  --raio: 10px;
+  --raio-grande: 18px;
+  --sombra: 0 10px 30px rgb(38 36 31 / 0.14);
+  --toque: 44px; /* área mínima de toque recomendada pela Apple */
+
+  /* Barra de abas */
+  --altura-abas: 60px;
+
+  color-scheme: light;
+}

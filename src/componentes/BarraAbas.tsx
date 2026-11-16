@@ -1,10 +1,14 @@
+import type { ComponentType, SVGProps } from 'react'
 import { irPara, type Aba, type Tela } from '../navegacao'
+import { IconeFuturo, IconeHabitos, IconeHoje, IconeMes } from './Icones'
 
-const ABAS: { aba: Aba; rotulo: string; simbolo: string }[] = [
-  { aba: 'hoje', rotulo: 'Hoje', simbolo: '•' },
-  { aba: 'habitos', rotulo: 'Hábitos', simbolo: '✓' },
-  { aba: 'mes', rotulo: 'Mês', simbolo: '▦' },
-  { aba: 'futuro', rotulo: 'Futuro', simbolo: '>' },
+type IconeAba = ComponentType<SVGProps<SVGSVGElement> & { tamanho?: number }>
+
+const ABAS: { aba: Aba; rotulo: string; Icone: IconeAba }[] = [
+  { aba: 'hoje', rotulo: 'Hoje', Icone: IconeHoje },
+  { aba: 'habitos', rotulo: 'Hábitos', Icone: IconeHabitos },
+  { aba: 'mes', rotulo: 'Mês', Icone: IconeMes },
+  { aba: 'futuro', rotulo: 'Futuro', Icone: IconeFuturo },
 ]
 
 /** Telas que não são abas acendem a aba "dona" delas. */
@@ -15,13 +19,14 @@ const ABA_DA_TELA: Record<Tela, Aba | null> = {
   futuro: 'futuro',
   migracao: 'futuro',
   ajustes: null,
+  amostra: null,
 }
 
 export function BarraAbas({ telaAtual }: { telaAtual: Tela }) {
   const ativa = ABA_DA_TELA[telaAtual]
   return (
     <nav className="barra-abas" aria-label="Seções">
-      {ABAS.map(({ aba, rotulo, simbolo }) => (
+      {ABAS.map(({ aba, rotulo, Icone }) => (
         <button
           key={aba}
           type="button"
@@ -29,9 +34,7 @@ export function BarraAbas({ telaAtual }: { telaAtual: Tela }) {
           aria-current={ativa === aba ? 'page' : undefined}
           onClick={() => irPara(aba)}
         >
-          <span className="barra-abas__simbolo" aria-hidden="true">
-            {simbolo}
-          </span>
+          <Icone className="barra-abas__icone" tamanho={24} />
           <span className="barra-abas__rotulo">{rotulo}</span>
         </button>
       ))}
