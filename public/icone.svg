@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Ícone provisório (a versão final entra na tarefa 7.1) -->
+  <rect width="512" height="512" rx="96" fill="#fbf8f1"/>
+  <g fill="#cfc8b8">
+    <circle cx="128" cy="128" r="10"/><circle cx="256" cy="128" r="10"/><circle cx="384" cy="128" r="10"/>
+    <circle cx="128" cy="384" r="10"/><circle cx="256" cy="384" r="10"/><circle cx="384" cy="384" r="10"/>
+  </g>
+  <circle cx="256" cy="256" r="72" fill="#2b2a28"/>
+</svg>

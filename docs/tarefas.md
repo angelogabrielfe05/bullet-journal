@@ -7,13 +7,13 @@
 ## 1.0 Estrutura do projeto
 
 - [x] 1.1 Criar o projeto com Vite + React + TypeScript e conferir que abre em `http://localhost:5173`
-- [ ] 1.2 Iniciar o git, criar o `.gitignore` e fazer o primeiro commit
-- [ ] 1.3 Instalar as dependências da stack (Dexie, dnd-kit, date-fns, vite-plugin-pwa, Vitest)
-- [ ] 1.4 Organizar as pastas (`src/telas`, `src/componentes`, `src/dados`, `src/regras`, `src/estilos`)
-- [ ] 1.5 Criar a navegação com barra inferior de 4 abas (Hoje, Hábitos, Mês, Futuro) e o botão de Ajustes, com telas vazias
-- [ ] 1.6 Configurar o PWA básico (manifest com nome e cores, service worker) e o caminho base `/bullet-journal/`
-- [ ] 1.7 Conferir: build sem erros, navegação entre abas funcionando em 375 px de largura
-- [ ] 1.8 Commit: "Estrutura do projeto"
+- [x] 1.2 Iniciar o git, criar o `.gitignore` e fazer o primeiro commit
+- [x] 1.3 Instalar as dependências da stack (Dexie, dnd-kit, date-fns, vite-plugin-pwa, Vitest)
+- [x] 1.4 Organizar as pastas (`src/telas`, `src/componentes`, `src/dados`, `src/regras`, `src/estilos`)
+- [x] 1.5 Criar a navegação com barra inferior de 4 abas (Hoje, Hábitos, Mês, Futuro) e o botão de Ajustes, com telas vazias
+- [x] 1.6 Configurar o PWA básico (manifest com nome e cores, service worker) e o caminho base `/bullet-journal/`
+- [x] 1.7 Conferir: build sem erros, navegação entre abas funcionando em 375 px de largura
+- [x] 1.8 Commit: "Estrutura do projeto"
 
 ## 2.0 Dados e regras
 
