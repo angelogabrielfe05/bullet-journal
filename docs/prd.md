@@ -42,7 +42,7 @@ Navegação por uma barra fixa embaixo com 4 abas: **Hoje · Hábitos · Mês ·
 ### 5.1 Hoje (registro diário)
 
 - Cabeçalho com a data por extenso (ex.: "segunda, 16 de novembro") e setas para ir ao dia anterior/seguinte, além de um botão "voltar para hoje".
-- **Pendentes de dias anteriores:** bloco no topo com as tarefas abertas (•) de dias passados. Cada uma tem 3 ações:
+- **Pendentes de dias anteriores:** bloco no topo com as tarefas abertas (•) de dias passados **do mês atual**. As de meses anteriores ficam para a migração mensal (5.4), para a mesma tarefa não aparecer em dois lugares. Cada uma tem 3 ações:
   - **Migrar para hoje** → o original vira `<` e uma cópia aberta entra no dia de hoje.
   - **Agendar** → escolhe um mês futuro; o original vira `>` e a tarefa vai para o Registro Futuro.
   - **Descartar** → a tarefa fica riscada.

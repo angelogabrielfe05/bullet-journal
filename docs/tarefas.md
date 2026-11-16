@@ -17,17 +17,17 @@
 
 ## 2.0 Dados e regras
 
-- [ ] 2.1 Definir os tipos dos dados: item (tarefa, evento, nota; estado; prioridade; data ou mês; horário; recuo; ordem), hábito, registro de hábito, reflexão do dia, ajustes
-- [ ] 2.2 Criar o banco local com Dexie (tabelas e índices) e pedir armazenamento persistente
-- [ ] 2.3 Criar os 5 hábitos iniciais na primeira abertura (academia, leitura, estudo, água 2.000 ml, corrida 5 km com as escalas do PRD)
-- [ ] 2.4 Funções de itens: criar, editar, trocar símbolo, marcar/desmarcar, recuar, reordenar, apagar
-- [ ] 2.5 Regra de pendências: listar tarefas abertas de dias anteriores; migrar para hoje (`<` + cópia), agendar (`>` + item no mês futuro), descartar (riscada)
-- [ ] 2.6 Regras de hábitos: "o hábito vale neste dia?", "foi cumprido?" (check ou meta), progresso do mês e sequência (streak) respeitando a escala
-- [ ] 2.7 Regra de migração mensal: listar tarefas abertas do mês anterior e aplicar migrar, agendar ou descartar
-- [ ] 2.8 Exportar backup (JSON com `versao` e data) e importar (validar, resumir, substituir)
-- [ ] 2.9 Testes automáticos (Vitest) para streak, progresso, pendências, migração e backup ida e volta
-- [ ] 2.10 Conferir: todos os testes passando
-- [ ] 2.11 Commit: "Dados e regras"
+- [x] 2.1 Definir os tipos dos dados: item (tarefa, evento, nota; estado; prioridade; data ou mês; horário; recuo; ordem), hábito, registro de hábito, reflexão do dia, ajustes
+- [x] 2.2 Criar o banco local com Dexie (tabelas e índices) e pedir armazenamento persistente
+- [x] 2.3 Criar os 5 hábitos iniciais na primeira abertura (academia, leitura, estudo, água 2.000 ml, corrida 5 km com as escalas do PRD)
+- [x] 2.4 Funções de itens: criar, editar, trocar símbolo, marcar/desmarcar, recuar, reordenar, apagar
+- [x] 2.5 Regra de pendências: listar tarefas abertas de dias anteriores; migrar para hoje (`<` + cópia), agendar (`>` + item no mês futuro), descartar (riscada)
+- [x] 2.6 Regras de hábitos: "o hábito vale neste dia?", "foi cumprido?" (check ou meta), progresso do mês e sequência (streak) respeitando a escala
+- [x] 2.7 Regra de migração mensal: listar tarefas abertas do mês anterior e aplicar migrar, agendar ou descartar
+- [x] 2.8 Exportar backup (JSON com `versao` e data) e importar (validar, resumir, substituir)
+- [x] 2.9 Testes automáticos (Vitest) para streak, progresso, pendências, migração e backup ida e volta
+- [x] 2.10 Conferir: todos os testes passando
+- [x] 2.11 Commit: "Dados e regras"
 
 ## 3.0 Visual do caderno
 

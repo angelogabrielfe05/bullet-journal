@@ -36,5 +36,7 @@ export default defineConfig({
   ],
   test: {
     environment: 'node',
+    // Simula o banco do navegador (IndexedDB) nos testes.
+    setupFiles: ['fake-indexeddb/auto'],
   },
 })
