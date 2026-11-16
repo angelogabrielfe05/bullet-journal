@@ -49,7 +49,6 @@ Para rodar no computador: `npm run dev` e abra http://localhost:5173/bullet-jour
 - Mudar os dias ou o tipo de um hábito refaz as contas dos meses anteriores (o app avisa ao editar).
 - Se duas ações forem feitas em menos de 5 s, o "Desfazer" da primeira some.
 - O contador "X de Y decididas" da migração recomeça se você sair da tela.
-- A conferir no iPhone de verdade: fluxo "Salvar em Arquivos", teclado sobre o painel de quantidade e campos de data/hora vazios (ver [revisao.md](revisao.md)).
 
 ## v2: lista priorizada
 
@@ -68,4 +67,5 @@ Puxada de [ideias-futuras.md](ideias-futuras.md). Ordem sugerida pelo uso diári
 
 ## Ajustes no workflow
 
-_(registro da conversa ao final da Etapa 6)_
+- 16/11/2026: v1 dada como concluída pelo usuário depois de instalar e testar no iPhone (offline, backup, teclado e datas ok). Nenhuma etapa do workflow foi apontada como travada ou sobrando.
+- Ajuste pós-publicação pedido pelo usuário: no Hoje, os hábitos passaram a ficar em lista vertical (um embaixo do outro) em vez de uma fileira com rolagem lateral.

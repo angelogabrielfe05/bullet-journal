@@ -88,5 +88,5 @@
 - [x] 7.5 Criar o repositório no GitHub (login feito pelo usuário) e enviar o código
 - [x] 7.6 Configurar a publicação automática no GitHub Pages
 - [x] 7.7 Abrir o link publicado e conferir que funciona
-- [ ] 7.8 Instalar no iPhone (Compartilhar → Adicionar à Tela de Início) e testar offline no aparelho
+- [x] 7.8 Instalar no iPhone (Compartilhar → Adicionar à Tela de Início) e testar offline no aparelho
 - [x] 7.9 Commit final e `docs/proximos-passos.md`

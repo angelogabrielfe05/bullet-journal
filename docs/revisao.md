@@ -60,11 +60,11 @@ Itens da revisão **não corrigidos**: por decisão de 16/11/2026, foram para [i
 - **#11 Contador da migração:** "X de Y decididas" zera ao sair e voltar da tela (o trabalho feito não se perde, só o contador).
 - **#17 Código duplicado:** juntar o fluxo decidir/desfazer de Pendentes e Migração e os nomes de dias/meses num lugar só.
 
-Para conferir **no iPhone de verdade** (não dá para simular aqui):
+Conferido **no iPhone de verdade** pelo usuário em 16/11/2026, tudo ok:
 
 - Fluxo do backup "Salvar em Arquivos".
-- Teclado cobrindo o campo do painel de quantidade.
+- Teclado sem cobrir o campo do painel de quantidade.
 - Aparência dos campos de data/hora vazios no Safari.
-- Instalação na Tela de Início, ícone e uso offline no aparelho.
+- Instalação na Tela de Início, ícone e uso offline no aparelho (Modo Avião).
 
 Observação técnica: no Windows, `npm test` pode falhar com "Vitest failed to find the runner" se o terminal estiver em `c:\` (minúsculo) em vez de `C:\`. É um problema conhecido do Vitest, não do app.
