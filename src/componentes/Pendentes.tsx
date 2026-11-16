@@ -4,8 +4,8 @@ import { agendar, descartar, desfazerDecisao, listarPendentes, migrarParaHoje } 
 import type { Item } from '../dados/tipos'
 import { formatarDiaCurto, formatarMes, type Dia } from '../regras/datas'
 import { useAviso } from './avisoContexto'
+import { LinhaDecisao } from './LinhaDecisao'
 import { PainelAgendar } from './PainelAgendar'
-import { MarcaPrioridade, Simbolo } from './Simbolo'
 
 /**
  * Migração diária: tarefas abertas de dias anteriores deste mês,
@@ -32,39 +32,21 @@ export function Pendentes({ hoje }: { hoje: Dia }) {
 
       <ul className="pendentes">
         {pendentes.map((item) => (
-          <li key={item.id} className="pendente">
-            <div className="pendente__linha">
-              <span className="bullet__prioridade">{item.prioridade && <MarcaPrioridade />}</span>
-              <Simbolo tipo="tarefa" />
-              <span className="pendente__texto">{item.texto}</span>
-              <span className="pendente__data">{formatarDiaCurto(item.dia!)}</span>
-            </div>
-            <div className="pendente__acoes">
-              <button
-                type="button"
-                className="botao botao--secundario botao--pequeno"
-                onClick={async () => {
-                  await migrarParaHoje(item.id, hoje)
-                  comDesfazer('Migrada para hoje', item.id)
-                }}
-              >
-                <Simbolo tipo="tarefa" estado="migrada" tamanho={14} /> Hoje
-              </button>
-              <button type="button" className="botao botao--secundario botao--pequeno" onClick={() => setAgendando(item)}>
-                Agendar <Simbolo tipo="tarefa" estado="agendada" tamanho={14} />
-              </button>
-              <button
-                type="button"
-                className="botao botao--fantasma botao--pequeno"
-                onClick={async () => {
-                  await descartar(item.id)
-                  comDesfazer('Tarefa descartada', item.id)
-                }}
-              >
-                Descartar
-              </button>
-            </div>
-          </li>
+          <LinhaDecisao
+            key={item.id}
+            item={item}
+            rotuloData={formatarDiaCurto(item.dia!)}
+            rotuloMigrar="Hoje"
+            aoMigrar={async () => {
+              await migrarParaHoje(item.id, hoje)
+              comDesfazer('Migrada para hoje', item.id)
+            }}
+            aoAgendar={() => setAgendando(item)}
+            aoDescartar={async () => {
+              await descartar(item.id)
+              comDesfazer('Tarefa descartada', item.id)
+            }}
+          />
         ))}
       </ul>
 

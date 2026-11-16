@@ -77,10 +77,6 @@
   color: var(--tinta-suave);
 }
 
-.opcao__mes::first-letter {
-  text-transform: uppercase;
-}
-
 /* ------------------------------------------------------------------ */
 /* Navegação entre dias                                                */
 /* ------------------------------------------------------------------ */
@@ -934,4 +930,224 @@ button.celula:active {
   border-color: var(--tinta);
   background: var(--tinta);
   color: var(--papel);
+}
+
+/* Campo de anotar: com dia + horário, os controles quebram linha no celular */
+.adicionar__simbolos {
+  flex-wrap: wrap;
+}
+
+.adicionar__dia + .adicionar__horario {
+  margin-left: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Calendário do mês                                                   */
+/* ------------------------------------------------------------------ */
+
+.calendario {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calendario__semana,
+.calendario__dias {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.calendario__semana span {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+.calendario__semana span[data-fds] {
+  color: var(--tinta-apagada);
+}
+
+.calendario__dias {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calendario__dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3px;
+  width: 100%;
+  height: 52px;
+  padding: 6px 0 0;
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.5);
+}
+
+.calendario__dia:active {
+  background: var(--papel-painel);
+}
+
+.calendario__dia[data-passado] .calendario__numero {
+  color: var(--tinta-suave);
+}
+
+.calendario__dia[data-hoje] {
+  border: 2px solid var(--destaque);
+}
+
+.calendario__dia[data-hoje] .calendario__numero {
+  color: var(--destaque);
+}
+
+.calendario__numero {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.calendario__marcas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  max-width: 36px;
+}
+
+.marca {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.marca--evento {
+  border: 1.5px solid var(--tinta);
+}
+
+.marca--tarefa {
+  background: var(--tinta);
+}
+
+.calendario__legenda .marca {
+  margin: 0 2px 0 6px;
+}
+
+.calendario__legenda .marca:first-child {
+  margin-left: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Lista de itens com data (Mês e Futuro)                              */
+/* ------------------------------------------------------------------ */
+
+.lista-datada {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.linha-datada {
+  display: grid;
+  grid-template-columns: 56px 14px 20px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 6px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px dashed var(--linha);
+  background: none;
+  text-align: left;
+}
+
+.linha-datada > .simbolo {
+  margin-top: 2px;
+}
+
+.linha-datada:active {
+  background: var(--papel-painel);
+}
+
+.linha-datada__dia {
+  font-size: var(--texto-pequeno);
+  font-weight: 650;
+  color: var(--tinta-suave);
+  white-space: nowrap;
+}
+
+.linha-datada__texto {
+  overflow-wrap: anywhere;
+}
+
+.linha-datada[data-estado='concluida'] .linha-datada__texto,
+.linha-datada[data-estado='migrada'] .linha-datada__texto,
+.linha-datada[data-estado='agendada'] .linha-datada__texto {
+  color: var(--tinta-suave);
+}
+
+.linha-datada[data-estado='descartada'] .linha-datada__texto {
+  color: var(--tinta-apagada);
+  text-decoration: line-through;
+}
+
+/* ------------------------------------------------------------------ */
+/* Futuro e Migração                                                   */
+/* ------------------------------------------------------------------ */
+
+.recado--neutro {
+  border-color: var(--ponto);
+  background: rgb(255 255 255 / 0.45);
+}
+
+.bloco-futuro {
+  padding-top: var(--meia-grade);
+  border-top: 1.5px dashed var(--linha);
+}
+
+.bloco-futuro__vazio {
+  font-size: var(--texto-pequeno);
+}
+
+.link--voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  margin-top: calc(var(--meia-grade) * -1);
+  text-decoration: none;
+}
+
+.progresso-migracao {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9375rem;
+}
+
+.migracao-fim {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+  padding: var(--grade) 16px;
+  border: 1.5px dashed var(--ponto);
+  border-radius: var(--raio);
+  text-align: center;
+  align-items: center;
+}
+
+.migracao-fim__titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: calc(var(--grade) * 2);
 }

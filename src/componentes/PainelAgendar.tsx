@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { formatarMes, mesDoDia, proximosMeses, somarDias, type Dia, type Mes } from '../regras/datas'
+import { capitalizar, formatarMes, mesDoDia, proximosMeses, somarDias, type Dia, type Mes } from '../regras/datas'
 import { Botao } from './Botao'
 import { PainelInferior } from './PainelInferior'
 
@@ -34,7 +34,7 @@ export function PainelAgendar({ aberto, aoFechar, aoEscolher, hoje, texto }: Pro
               <span className="opcao__icone" aria-hidden="true">
                 &gt;
               </span>
-              <span className="opcao__mes">{formatarMes(mes)}</span>
+              <span>{capitalizar(formatarMes(mes))}</span>
             </button>
           </li>
         ))}

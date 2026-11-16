@@ -1,7 +1,8 @@
 import { useRef, useState, type FormEvent } from 'react'
-import { criarItem, type Lista } from '../dados/itens'
+import { criarItem, listaDoDia, type Lista } from '../dados/itens'
 import type { TipoItem } from '../dados/tipos'
 import { interpretarAtalho } from '../regras/atalhos'
+import { diasDoMes, type Mes } from '../regras/datas'
 import { IconeMais } from './Icones'
 import { MarcaPrioridade, Simbolo } from './Simbolo'
 
@@ -15,17 +16,20 @@ interface Props {
   lista: Lista
   /** Texto de exemplo no campo. */
   dica?: string
+  /** Mostra um campo de dia opcional dentro deste mês (Futuro). Com dia, o item vai para o registro daquele dia. */
+  escolherDiaEm?: Mes
 }
 
 /**
  * Campo de anotação rápida no fim da lista. Escolha o símbolo nos botões
  * ou use os atalhos: "-" nota, "o " evento, "*" prioridade.
  */
-export function AdicionarItem({ lista, dica = 'Anotar…  ( - nota · o evento )' }: Props) {
+export function AdicionarItem({ lista, dica = 'Anotar…  ( - nota · o evento )', escolherDiaEm }: Props) {
   const [tipoEscolhido, setTipoEscolhido] = useState<TipoItem>('tarefa')
   const [prioridadeEscolhida, setPrioridadeEscolhida] = useState(false)
   const [texto, setTexto] = useState('')
   const [horario, setHorario] = useState('')
+  const [dia, setDia] = useState('')
   const campo = useRef<HTMLInputElement>(null)
 
   // O atalho digitado aparece na hora nos botões de símbolo.
@@ -39,12 +43,13 @@ export function AdicionarItem({ lista, dica = 'Anotar…  ( - nota · o evento )
     await criarItem({
       tipo,
       texto: atalho.texto,
-      lista,
+      lista: dia ? listaDoDia(dia) : lista,
       prioridade,
       horario: tipo === 'evento' && horario ? horario : undefined,
     })
     setTexto('')
     setHorario('')
+    setDia('')
     setTipoEscolhido('tarefa')
     setPrioridadeEscolhida(false)
     campo.current?.focus()
@@ -82,6 +87,18 @@ export function AdicionarItem({ lista, dica = 'Anotar…  ( - nota · o evento )
         >
           <MarcaPrioridade />
         </button>
+        {escolherDiaEm && (
+          <input
+            type="date"
+            className="adicionar__horario adicionar__dia"
+            aria-label="Dia (opcional)"
+            title="Dia (opcional)"
+            min={diasDoMes(escolherDiaEm)[0]}
+            max={diasDoMes(escolherDiaEm).at(-1)}
+            value={dia}
+            onChange={(e) => setDia(e.target.value)}
+          />
+        )}
         {tipo === 'evento' && (
           <input
             type="time"

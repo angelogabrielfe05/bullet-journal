@@ -69,15 +69,15 @@
 
 ## 6.0 Mês, Futuro e Migração
 
-- [ ] 6.1 Calendário do mês (semana na segunda) com setas de mês e destaque no dia de hoje
-- [ ] 6.2 Marcadores nos dias (eventos e tarefas abertas); tocar no dia abre o registro daquele dia
-- [ ] 6.3 Lista de eventos do mês em ordem cronológica
-- [ ] 6.4 Tarefas do mês (sem dia): adicionar, mesmas ações de item, mover para um dia
-- [ ] 6.5 Registro Futuro: 6 meses à frente, adicionar item a um mês com data opcional
-- [ ] 6.6 Itens do Futuro aparecem no Mês quando o mês chega
-- [ ] 6.7 Tela de Migração: lista de tarefas abertas do mês anterior, migrar/agendar/descartar, progresso "X de Y" e confirmação final
-- [ ] 6.8 Conferir: simular uma virada de mês com dados de teste e fazer a migração inteira
-- [ ] 6.9 Commit: "Mês, Futuro e Migração"
+- [x] 6.1 Calendário do mês (semana na segunda) com setas de mês e destaque no dia de hoje
+- [x] 6.2 Marcadores nos dias (eventos e tarefas abertas); tocar no dia abre o registro daquele dia
+- [x] 6.3 Lista de eventos do mês em ordem cronológica
+- [x] 6.4 Tarefas do mês (sem dia): adicionar, mesmas ações de item, mover para um dia
+- [x] 6.5 Registro Futuro: 6 meses à frente, adicionar item a um mês com data opcional
+- [x] 6.6 Itens do Futuro aparecem no Mês quando o mês chega
+- [x] 6.7 Tela de Migração: lista de tarefas abertas do mês anterior, migrar/agendar/descartar, progresso "X de Y" e confirmação final
+- [x] 6.8 Conferir: simular uma virada de mês com dados de teste e fazer a migração inteira
+- [x] 6.9 Commit: "Mês, Futuro e Migração"
 
 ## 7.0 Acabamento e publicação
 

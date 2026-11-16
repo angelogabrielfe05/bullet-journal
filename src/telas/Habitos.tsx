@@ -2,16 +2,14 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { useState, type CSSProperties } from 'react'
 import { Botao } from '../componentes/Botao'
 import { GradeHabitos } from '../componentes/GradeHabitos'
-import { IconeSetaDireita, IconeSetaEsquerda } from '../componentes/Icones'
+import { NavegacaoMes } from '../componentes/NavegacaoMes'
 import { Pagina } from '../componentes/Pagina'
 import { PainelQuantidade } from '../componentes/PainelQuantidade'
 import { useHoje } from '../componentes/useHoje'
 import { listarHabitos, registrosEntre } from '../dados/habitos'
 import type { Habito } from '../dados/tipos'
 import { irPara, type PropsTela } from '../navegacao'
-import { diasDoMes, formatarMes, mesDoDia, somarMeses, type Dia, type Mes } from '../regras/datas'
-
-const ehMesValido = (texto: string) => /^\d{4}-(0[1-9]|1[0-2])$/.test(texto)
+import { diasDoMes, ehMesValido, mesDoDia, type Dia, type Mes } from '../regras/datas'
 
 /** Grade de hábitos do mês. Sem parâmetro mostra o mês atual; #/habitos/2026-10 mostra outubro. */
 export function Habitos({ parametro }: PropsTela) {
@@ -33,22 +31,7 @@ export function Habitos({ parametro }: PropsTela) {
 
   return (
     <Pagina titulo="Hábitos">
-      <nav className="navegacao-dia" aria-label="Trocar de mês">
-        <button type="button" className="botao-simbolo" aria-label="Mês anterior" onClick={() => ir(somarMeses(mes, -1))}>
-          <IconeSetaEsquerda tamanho={20} />
-        </button>
-        <p className="navegacao-dia__data navegacao-dia__data--mes" aria-live="polite">
-          {formatarMes(mes)}
-        </p>
-        <button type="button" className="botao-simbolo" aria-label="Mês seguinte" onClick={() => ir(somarMeses(mes, 1))}>
-          <IconeSetaDireita tamanho={20} />
-        </button>
-        {mes !== mesAtual && (
-          <button type="button" className="link navegacao-dia__hoje" onClick={() => irPara('habitos')}>
-            voltar para o mês atual
-          </button>
-        )}
-      </nav>
+      <NavegacaoMes mes={mes} mesAtual={mesAtual} aoIr={ir} />
 
       {habitos && registros && habitos.length > 0 && (
         <GradeHabitos

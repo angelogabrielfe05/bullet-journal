@@ -46,6 +46,9 @@ export const proximosMeses = (mes: Mes, n: number): Mes[] =>
 export const formatarDiaExtenso = (dia: Dia): string =>
   format(parseISO(dia), "EEEE, d 'de' MMMM", { locale: ptBR }).replace('-feira', '')
 
+/** Primeira letra maiúscula: "novembro de 2026" → "Novembro de 2026". */
+export const capitalizar = (texto: string): string => texto.charAt(0).toUpperCase() + texto.slice(1)
+
 /** "novembro de 2026" */
 export const formatarMes = (mes: Mes): string =>
   format(inicioDoMes(mes), "MMMM 'de' yyyy", { locale: ptBR })
@@ -61,6 +64,9 @@ export const formatarDiaNumerico = (dia: Dia): string => format(parseISO(dia), '
 /** Confere se o texto é um dia válido no formato "2026-11-16". */
 export const ehDiaValido = (texto: string): boolean =>
   /^\d{4}-\d{2}-\d{2}$/.test(texto) && isValid(parseISO(texto)) && paraDia(parseISO(texto)) === texto
+
+/** Confere se o texto é um mês válido no formato "2026-11". */
+export const ehMesValido = (texto: string): boolean => /^\d{4}-(0[1-9]|1[0-2])$/.test(texto)
 
 /** Dias inteiros entre duas datas (ISO com hora ou dia), ex.: para "backup há 9 dias". */
 export const diasDesde = (isoOuDia: string, ate: Date = new Date()): number =>
