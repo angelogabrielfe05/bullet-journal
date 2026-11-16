@@ -39,14 +39,30 @@ export function Reflexao({ dia }: { dia: Dia }) {
   // Ao sair da tela ou trocar de dia, salva o que faltou.
   useEffect(() => () => void salvar(), [salvar])
 
+  // Ao mandar o app para o segundo plano (ou fechar), salva na hora.
+  useEffect(() => {
+    const aoEsconder = () => {
+      if (document.visibilityState === 'hidden') void salvar()
+    }
+    const aoSair = () => void salvar()
+    document.addEventListener('visibilitychange', aoEsconder)
+    window.addEventListener('pagehide', aoSair)
+    return () => {
+      document.removeEventListener('visibilitychange', aoEsconder)
+      window.removeEventListener('pagehide', aoSair)
+    }
+  }, [salvar])
+
   return (
     <section className="bloco reflexao" aria-labelledby="titulo-reflexao">
       <header className="bloco__cabecalho bloco__cabecalho--linha">
         <h2 id="titulo-reflexao" className="bloco__titulo">
           Reflexão do dia
         </h2>
-        <span className="reflexao__situacao" aria-live="polite">
-          {situacao === 'salvando' ? 'salvando…' : situacao === 'salvo' ? 'salvo ✓' : ''}
+        <span className="reflexao__situacao">{situacao === 'salvando' ? 'salvando…' : situacao === 'salvo' ? 'salvo ✓' : ''}</span>
+        {/* Leitor de tela: anuncia só quando salvou, não a cada tecla. */}
+        <span className="visualmente-oculto" aria-live="polite">
+          {situacao === 'salvo' ? 'Reflexão salva' : ''}
         </span>
       </header>
       <AreaTexto

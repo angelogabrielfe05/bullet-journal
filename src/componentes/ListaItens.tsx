@@ -16,7 +16,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import {
   alternarConcluida,
   alternarPrioridade,
@@ -206,11 +206,35 @@ function rotuloDestino(destino: string) {
 function EdicaoTexto({ item, aoTerminar }: { item: Item; aoTerminar: (texto: string | null) => void }) {
   const [texto, setTexto] = useState(item.texto)
   const terminou = useRef(false)
+  const atual = useRef(item.texto)
+  const aoTerminarRef = useRef(aoTerminar)
   const terminar = (valor: string | null) => {
     if (terminou.current) return
     terminou.current = true
     aoTerminar(valor)
   }
+
+  // Se o app for para o segundo plano no meio da edição, salva o que foi digitado.
+  useEffect(() => {
+    aoTerminarRef.current = aoTerminar
+  })
+  useEffect(() => {
+    const salvarAgora = () => {
+      if (terminou.current) return
+      terminou.current = true
+      aoTerminarRef.current(atual.current)
+    }
+    const aoEsconder = () => {
+      if (document.visibilityState === 'hidden') salvarAgora()
+    }
+    document.addEventListener('visibilitychange', aoEsconder)
+    window.addEventListener('pagehide', salvarAgora)
+    return () => {
+      document.removeEventListener('visibilitychange', aoEsconder)
+      window.removeEventListener('pagehide', salvarAgora)
+    }
+  }, [])
+
   return (
     <input
       className="bullet__edicao"
@@ -218,7 +242,10 @@ function EdicaoTexto({ item, aoTerminar }: { item: Item; aoTerminar: (texto: str
       value={texto}
       autoFocus
       enterKeyHint="done"
-      onChange={(e) => setTexto(e.target.value)}
+      onChange={(e) => {
+        setTexto(e.target.value)
+        atual.current = e.target.value
+      }}
       onBlur={() => terminar(texto)}
       onKeyDown={(e) => {
         if (e.key === 'Enter') terminar(texto)

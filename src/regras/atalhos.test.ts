@@ -16,7 +16,8 @@ describe('atalhos de digitação', () => {
     expect(interpretarAtalho('o Prova de farmaco')).toMatchObject({ tipo: 'evento', texto: 'Prova de farmaco' })
     expect(interpretarAtalho('○ Plantão')).toMatchObject({ tipo: 'evento', texto: 'Plantão' })
     expect(interpretarAtalho('ouvir podcast')).toMatchObject({ tipo: undefined, texto: 'ouvir podcast' })
-    expect(interpretarAtalho('O médico ligou')).toMatchObject({ tipo: undefined })
+    // O iPhone põe a 1ª letra em maiúscula: "O " também vale (o botão de símbolo corrige se não for evento).
+    expect(interpretarAtalho('O Prova')).toMatchObject({ tipo: 'evento', texto: 'Prova' })
   })
 
   it('"*" marca prioridade e combina com os outros', () => {
@@ -24,6 +25,11 @@ describe('atalhos de digitação', () => {
     expect(interpretarAtalho('*Entregar')).toMatchObject({ prioridade: true, texto: 'Entregar' })
     expect(interpretarAtalho('* o Prova')).toEqual({ tipo: 'evento', prioridade: true, texto: 'Prova' })
     expect(interpretarAtalho('o * Prova')).toEqual({ tipo: 'evento', prioridade: true, texto: 'Prova' })
+  })
+
+  it('com ignorarTipo, só tira a prioridade e mantém o começo do texto', () => {
+    expect(interpretarAtalho('O médico ligou', { ignorarTipo: true })).toEqual({ tipo: undefined, prioridade: false, texto: 'O médico ligou' })
+    expect(interpretarAtalho('* - lista', { ignorarTipo: true })).toEqual({ tipo: undefined, prioridade: true, texto: '- lista' })
   })
 
   it('símbolo sozinho, sem texto, não vira atalho', () => {

@@ -16,7 +16,8 @@
   /* Tinta */
   --tinta: #26241f;
   --tinta-suave: #69645a;
-  --tinta-apagada: #a39c8e;
+  --tinta-apagada: #a39c8e; /* só decoração (2,5:1) */
+  --tinta-dica: #706a5f; /* textos de exemplo e detalhes pequenos (5,0:1 no papel, 4,6:1 no painel) */
 
   /* Caneta vermelha: prioridade (*), dia de hoje, ações de destaque */
   --destaque: #b03f28;

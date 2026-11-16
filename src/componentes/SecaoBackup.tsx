@@ -62,6 +62,7 @@ export function SecaoBackup() {
       setAImportar(null)
       avisar({ texto: 'Backup importado ✓' })
     } catch {
+      setAImportar(null) // fecha o painel para o aviso aparecer na frente
       avisar({ texto: 'A importação falhou. Seus dados atuais não foram alterados.', duracao: 7000 })
     } finally {
       setOcupado(false)

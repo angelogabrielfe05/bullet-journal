@@ -1,5 +1,7 @@
 import { lazy, Suspense, type ComponentType } from 'react'
 import { ProvedorAviso } from './componentes/Aviso'
+import { AvisoAtualizacao } from './componentes/AvisoAtualizacao'
+import { ProtecaoErro } from './componentes/ProtecaoErro'
 import { BarraAbas } from './componentes/BarraAbas'
 import { useRota, type PropsTela, type Tela } from './navegacao'
 import { Ajustes } from './telas/Ajustes'
@@ -29,12 +31,16 @@ export default function App() {
     <ProvedorAviso>
       <div className="app">
         <main className="app__conteudo">
-          <Suspense fallback={null}>
-            <TelaAtual parametro={rota.parametro} />
-          </Suspense>
+          {/* key: trocar de tela limpa um erro anterior */}
+          <ProtecaoErro key={`${rota.tela}/${rota.parametro ?? ''}`}>
+            <Suspense fallback={null}>
+              <TelaAtual parametro={rota.parametro} />
+            </Suspense>
+          </ProtecaoErro>
         </main>
         <BarraAbas telaAtual={rota.tela} />
       </div>
+      <AvisoAtualizacao />
     </ProvedorAviso>
   )
 }

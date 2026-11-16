@@ -56,6 +56,21 @@ describe('itens', () => {
     expect(await db.itens.get(t.id)).toMatchObject({ tipo: 'nota', estado: 'aberta' })
   })
 
+  it('trocar o símbolo não reabre tarefa já migrada', async () => {
+    const t = await criarItem({ tipo: 'tarefa', texto: 't', lista: listaDoDia('2026-11-14') })
+    await db.itens.update(t.id, { estado: 'migrada', destino: HOJE })
+    await trocarTipo(t.id, 'nota')
+    await trocarTipo(t.id, 'tarefa')
+    expect((await db.itens.get(t.id))?.estado).toBe('migrada')
+  })
+
+  it('apagar o primeiro item tira o recuo do subitem que ficou no topo', async () => {
+    const pai = await criarItem({ tipo: 'tarefa', texto: 'pai', lista: listaDoDia(HOJE) })
+    const filho = await criarItem({ tipo: 'nota', texto: 'filho', lista: listaDoDia(HOJE), recuo: 1 })
+    await apagarItem(pai.id)
+    expect((await db.itens.get(filho.id))?.recuo).toBe(0)
+  })
+
   it('reordena e mantém listas de dia e de mês separadas', async () => {
     const a = await criarItem({ tipo: 'tarefa', texto: 'a', lista: listaDoDia(HOJE) })
     const b = await criarItem({ tipo: 'tarefa', texto: 'b', lista: listaDoDia(HOJE) })

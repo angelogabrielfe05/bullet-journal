@@ -87,7 +87,7 @@
 }
 
 .campo__entrada::placeholder {
-  color: var(--tinta-apagada);
+  color: var(--tinta-dica);
 }
 
 .campo__entrada:focus {

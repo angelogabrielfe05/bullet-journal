@@ -11,9 +11,11 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      // Atualiza o app sozinho quando houver versão nova publicada.
-      registerType: 'autoUpdate',
-      includeAssets: ['icone.svg'],
+      // Quando houver versão nova publicada, o app avisa e a pessoa toca em "Atualizar"
+      // (ver src/componentes/AvisoAtualizacao.tsx).
+      registerType: 'prompt',
+      // Os ícones já entram pelo globPatterns abaixo; isto evita listá-los duas vezes.
+      includeManifestIcons: false,
       manifest: {
         name: 'Bullet Journal',
         short_name: 'BuJo',
@@ -23,9 +25,15 @@ export default defineConfig({
         scope: BASE,
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#fbf8f1',
-        theme_color: '#fbf8f1',
-        icons: [{ src: 'icone.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],
+        background_color: '#faf7f0',
+        theme_color: '#faf7f0',
+        icons: [
+          { src: 'icone-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: 'icone-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          // O desenho fica na zona segura central, então serve também como "maskable".
+          { src: 'icone-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: 'icone.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+        ],
       },
       workbox: {
         // Guarda no aparelho tudo que o app precisa para abrir offline.

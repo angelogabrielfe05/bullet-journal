@@ -1,9 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Ícone provisório (a versão final entra na tarefa 7.1) -->
-  <rect width="512" height="512" rx="96" fill="#fbf8f1"/>
-  <g fill="#cfc8b8">
-    <circle cx="128" cy="128" r="10"/><circle cx="256" cy="128" r="10"/><circle cx="384" cy="128" r="10"/>
-    <circle cx="128" cy="384" r="10"/><circle cx="256" cy="384" r="10"/><circle cx="384" cy="384" r="10"/>
+  <!-- Ícone do app: página pontilhada com • ○ X e o * de prioridade.
+       O conteúdo fica dentro da "zona segura" central (80%), então serve
+       também como ícone "maskable" (Android corta em círculo/gota). -->
+  <rect width="512" height="512" fill="#faf7f0"/>
+  <g fill="#d6cfbf">
+    <circle cx="64" cy="64" r="5"/><circle cx="128" cy="64" r="5"/><circle cx="192" cy="64" r="5"/><circle cx="256" cy="64" r="5"/><circle cx="320" cy="64" r="5"/><circle cx="384" cy="64" r="5"/><circle cx="448" cy="64" r="5"/>
+    <circle cx="64" cy="448" r="5"/><circle cx="128" cy="448" r="5"/><circle cx="192" cy="448" r="5"/><circle cx="256" cy="448" r="5"/><circle cx="320" cy="448" r="5"/><circle cx="384" cy="448" r="5"/><circle cx="448" cy="448" r="5"/>
+    <circle cx="64" cy="128" r="5"/><circle cx="64" cy="192" r="5"/><circle cx="64" cy="256" r="5"/><circle cx="64" cy="320" r="5"/><circle cx="64" cy="384" r="5"/>
+    <circle cx="448" cy="128" r="5"/><circle cx="448" cy="192" r="5"/><circle cx="448" cy="256" r="5"/><circle cx="448" cy="320" r="5"/><circle cx="448" cy="384" r="5"/>
   </g>
-  <circle cx="256" cy="256" r="72" fill="#2b2a28"/>
+  <g transform="translate(16 0)">
+  <g stroke="#26241f" stroke-linecap="round" fill="none">
+    <!-- • tarefa -->
+    <circle cx="176" cy="176" r="22" fill="#26241f" stroke="none"/>
+    <path d="M232 176h152" stroke-width="20"/>
+    <!-- ○ evento -->
+    <circle cx="176" cy="256" r="21" stroke-width="13"/>
+    <path d="M232 256h120" stroke-width="20"/>
+    <!-- X concluída -->
+    <path d="M156 316l40 40M196 316l-40 40" stroke-width="15"/>
+    <path d="M232 336h96" stroke-width="20" stroke="#8c867a"/>
+  </g>
+  <!-- * prioridade, caneta vermelha -->
+  <path d="M112 156v40M94.7 166l34.6 20M129.3 166l-34.6 20" stroke="#b03f28" stroke-width="10" stroke-linecap="round"/>
+  </g>
 </svg>

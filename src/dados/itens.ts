@@ -72,13 +72,18 @@ export async function editarTexto(id: string, texto: string) {
   await alterar(id, { texto: texto.trim() })
 }
 
-/** Troca o símbolo (ex.: nota → tarefa). Volta o estado para aberta. */
+/**
+ * Troca o símbolo (ex.: nota → tarefa). Uma tarefa concluída volta para aberta;
+ * uma já migrada, agendada ou descartada mantém o estado (senão reapareceria
+ * nas pendentes enquanto a cópia dela continua existindo).
+ */
 export async function trocarTipo(id: string, tipo: TipoItem) {
   const item = await db.itens.get(id)
   if (!item || item.tipo === tipo) return
+  const manterEstado = item.estado === 'migrada' || item.estado === 'agendada' || item.estado === 'descartada'
   await alterar(id, {
     tipo,
-    estado: 'aberta',
+    estado: manterEstado ? item.estado : 'aberta',
     horario: tipo === 'evento' ? item.horario : undefined,
   })
 }
@@ -125,9 +130,15 @@ export async function moverPara(id: string, lista: Lista) {
 
 /** Apaga e devolve o item, para permitir "desfazer". */
 export async function apagarItem(id: string): Promise<Item | undefined> {
-  const item = await db.itens.get(id)
-  if (item) await db.itens.delete(id)
-  return item
+  return db.transaction('rw', db.itens, async () => {
+    const item = await db.itens.get(id)
+    if (!item) return
+    await db.itens.delete(id)
+    // O primeiro item da lista não pode ficar recuado sob nada.
+    const [primeiro] = await itensDaLista({ mes: item.mes, dia: item.dia })
+    if (primeiro?.recuo) await alterar(primeiro.id, { recuo: 0 })
+    return item
+  })
 }
 
 /** Desfaz um apagamento. */

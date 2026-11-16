@@ -11,11 +11,12 @@ export interface Interpretado {
 /**
  * Atalhos de digitação no começo do texto (rapid logging):
  *   "-" ou "–"  → nota       ex.: "- dormi mal"
- *   "o " ou "○ " → evento    ex.: "o Prova de farmaco"  (precisa do espaço)
+ *   "o ", "O " ou "○ " → evento  ex.: "o Prova de farmaco"  (precisa do espaço;
+ *                        "O" maiúsculo porque o iPhone capitaliza a 1ª letra)
  *   "• "        → tarefa
  *   "*"         → prioridade, combinável: "* o Prova", "o * Prova"
  */
-export function interpretarAtalho(bruto: string): Interpretado {
+export function interpretarAtalho(bruto: string, opcoes: { ignorarTipo?: boolean } = {}): Interpretado {
   let texto = bruto.trimStart()
   let prioridade = false
   let tipo: TipoItem | undefined
@@ -29,12 +30,14 @@ export function interpretarAtalho(bruto: string): Interpretado {
 
   tirarPrioridade()
 
-  if (/^[-–—]\s*\S/.test(texto)) {
+  if (opcoes.ignorarTipo) {
+    // A pessoa escolheu o símbolo no botão: o começo do texto fica como foi digitado.
+  } else if (/^[-–—]\s*\S/.test(texto)) {
     tipo = 'nota'
     texto = texto.replace(/^[-–—]\s*/, '')
-  } else if (/^[o○]\s+\S/.test(texto)) {
+  } else if (/^[oO○]\s+\S/.test(texto)) {
     tipo = 'evento'
-    texto = texto.replace(/^[o○]\s+/, '')
+    texto = texto.replace(/^[oO○]\s+/, '')
   } else if (/^•\s*\S/.test(texto)) {
     tipo = 'tarefa'
     texto = texto.replace(/^•\s*/, '')

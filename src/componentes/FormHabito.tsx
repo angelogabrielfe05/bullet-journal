@@ -110,6 +110,13 @@ export function FormHabito({ habito, aoTerminar }: Props) {
         </div>
       </fieldset>
 
+      {habito && (
+        <p className="bloco__ajuda">
+          Mudar os dias ou o tipo refaz as contas de progresso e sequência também dos meses anteriores. Se a rotina mudou de vez,
+          pode ser melhor arquivar este hábito e criar um novo.
+        </p>
+      )}
+
       {erro && (
         <p className="form-habito__erro" role="alert">
           {erro}

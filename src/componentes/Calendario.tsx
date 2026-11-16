@@ -12,6 +12,25 @@ interface Props {
   itens: Item[]
 }
 
+/** Até 3 marquinhas; acima disso, uma marquinha com o número (ex.: •5). */
+function Marcas({ quantidade, classe }: { quantidade: number; classe: string }) {
+  if (quantidade > MAX_MARCAS) {
+    return (
+      <span className="marca-numero">
+        <span className={`marca ${classe}`} />
+        {quantidade}
+      </span>
+    )
+  }
+  return (
+    <>
+      {Array.from({ length: quantidade }, (_, i) => (
+        <span key={i} className={`marca ${classe}`} />
+      ))}
+    </>
+  )
+}
+
 /** Calendário do mês. Cada dia mostra ○ por evento e • por tarefa aberta; tocar abre o dia. */
 export function Calendario({ mes, hoje, itens }: Props) {
   const dias = diasDoMes(mes)
@@ -58,12 +77,8 @@ export function Calendario({ mes, hoje, itens }: Props) {
               >
                 <span className="calendario__numero">{Number(dia.slice(8))}</span>
                 <span className="calendario__marcas" aria-hidden="true">
-                  {Array.from({ length: Math.min(conta.eventos, MAX_MARCAS) }, (_, i) => (
-                    <span key={`e${i}`} className="marca marca--evento" />
-                  ))}
-                  {Array.from({ length: Math.min(conta.abertas, MAX_MARCAS) }, (_, i) => (
-                    <span key={`t${i}`} className="marca marca--tarefa" />
-                  ))}
+                  <Marcas quantidade={conta.eventos} classe="marca--evento" />
+                  <Marcas quantidade={conta.abertas} classe="marca--tarefa" />
                 </span>
               </button>
             </li>

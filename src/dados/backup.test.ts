@@ -75,19 +75,46 @@ describe('backup', () => {
     expect(await lerUltimoBackup()).toBe('2026-11-16T10:00:00.000Z')
   })
 
+  it('recusa campo a campo um arquivo editado à mão', async () => {
+    await garantirDadosIniciais(HOJE)
+    await criarItem({ tipo: 'tarefa', texto: 'fica', lista: listaDoDia(HOJE) })
+    const texto = backupParaTexto(await exportarBackup())
+    // Cada caso estraga um campo de uma cópia do backup bom.
+    const estragar = (mudar: (b: any) => void) => {
+      const copia = JSON.parse(texto)
+      mudar(copia)
+      return copia
+    }
+    const casos: [string, unknown][] = [
+      ['dias', estragar((b) => delete b.dados.habitos[0].dias)],
+      ['dias', estragar((b) => (b.dados.habitos[0].dias = [1, 9]))],
+      ['tipo', estragar((b) => (b.dados.itens[0].tipo = 'lembrete'))],
+      ['mes', estragar((b) => (b.dados.itens[0].mes = '2026-13'))],
+      ['ordem', estragar((b) => (b.dados.itens[0].ordem = '1'))],
+      ['incompleto', estragar((b) => (b.exportadoEm = 'ontem'))],
+      ['meta', estragar((b) => delete b.dados.habitos.find((h: { tipo: string }) => h.tipo === 'quantidade').meta)],
+      ['dia', estragar((b) => b.dados.registros.push({ id: 'x', habitoId: 'y', dia: '16/11/2026' }))],
+    ]
+    for (const [campo, caso] of casos) expect(() => validarBackup(caso)).toThrow(campo)
+    // O backup bom continua aceito.
+    expect(() => lerTextoDoBackup(texto)).not.toThrow()
+  })
+
   it('recusa arquivos inválidos com mensagem em português', () => {
     expect(() => lerTextoDoBackup('isso não é json')).toThrow(ErroBackup)
     expect(() => validarBackup({ app: 'outro-app', versao: 1 })).toThrow('não é um backup')
     expect(() => validarBackup({ app: 'bullet-journal', versao: 99, dados: {} })).toThrow('versão mais nova')
-    expect(() =>
-      validarBackup({ app: 'bullet-journal', versao: 1, dados: { itens: [], habitos: [] } }),
-    ).toThrow('incompleto')
+    const exportadoEm = '2026-11-16T10:00:00.000Z'
+    expect(() => validarBackup({ app: 'bullet-journal', versao: 1, exportadoEm, dados: { itens: [], habitos: [] } })).toThrow(
+      'incompleto',
+    )
     expect(() =>
       validarBackup({
         app: 'bullet-journal',
         versao: 1,
+        exportadoEm,
         dados: { itens: [{ semId: true }], habitos: [], registros: [], reflexoes: [] },
       }),
-    ).toThrow('incompleto')
+    ).toThrow('inválidos')
   })
 })

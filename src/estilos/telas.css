@@ -153,7 +153,7 @@
 
 .bullet__destino {
   font-size: var(--texto-pequeno);
-  color: var(--tinta-apagada);
+  color: var(--tinta-dica);
   white-space: nowrap;
 }
 
@@ -642,19 +642,30 @@
   color: var(--papel);
 }
 
-button.celula {
+/* Área de toque: a célula inteira da grade (34 × 60 px) */
+.celula-toque {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 60px;
+  padding: 0;
+  border: 0;
+  background: none;
   cursor: pointer;
 }
 
-button.celula:active {
-  transform: scale(0.92);
+.celula-toque:active .celula {
+  transform: scale(0.9);
 }
 
-.celula:disabled {
+.celula-toque:disabled {
+  cursor: default;
+}
+
+.celula-toque:disabled .celula {
   border-style: dashed;
   border-color: var(--ponto);
   background: transparent;
-  cursor: default;
 }
 
 /* Parcial: enche de baixo para cima conforme a meta */
@@ -966,7 +977,7 @@ button.celula:active {
 }
 
 .calendario__semana span[data-fds] {
-  color: var(--tinta-apagada);
+  color: var(--tinta-dica);
 }
 
 .calendario__dias {
@@ -1010,6 +1021,15 @@ button.celula:active {
   font-weight: 650;
   line-height: 18px;
   font-variant-numeric: tabular-nums;
+}
+
+.marca-numero {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 8px;
 }
 
 .calendario__marcas {
@@ -1150,4 +1170,17 @@ button.celula:active {
   font-weight: 700;
   font-size: 2rem;
   line-height: calc(var(--grade) * 2);
+}
+
+/* Tela de erro (proteção contra tela branca) */
+.protecao-erro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--meia-grade);
+  padding-top: calc(var(--grade) + env(safe-area-inset-top));
+}
+
+.protecao-erro__detalhe {
+  overflow-wrap: anywhere;
+  color: var(--tinta-dica);
 }

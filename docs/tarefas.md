@@ -81,10 +81,10 @@
 
 ## 7.0 Acabamento e publicação
 
-- [ ] 7.1 Ícone do app (tela de início do iPhone) e tela de abertura
-- [ ] 7.2 Testar offline: desligar a rede no navegador e usar todas as telas
-- [ ] 7.3 Passada final em 360, 375 e 430 px e no computador; zero erros no console
-- [ ] 7.4 → Etapa 5 (revisão independente e testes) antes de publicar
+- [x] 7.1 Ícone do app (tela de início do iPhone) e tela de abertura
+- [x] 7.2 Testar offline: desligar a rede no navegador e usar todas as telas
+- [x] 7.3 Passada final em 360, 375 e 430 px e no computador; zero erros no console
+- [x] 7.4 → Etapa 5 (revisão independente e testes) antes de publicar
 - [ ] 7.5 Criar o repositório no GitHub (login feito pelo usuário) e enviar o código
 - [ ] 7.6 Configurar a publicação automática no GitHub Pages
 - [ ] 7.7 Abrir o link publicado e conferir que funciona

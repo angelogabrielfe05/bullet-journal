@@ -25,16 +25,20 @@ interface Props {
  * ou use os atalhos: "-" nota, "o " evento, "*" prioridade.
  */
 export function AdicionarItem({ lista, dica = 'Anotar…  ( - nota · o evento )', escolherDiaEm }: Props) {
-  const [tipoEscolhido, setTipoEscolhido] = useState<TipoItem>('tarefa')
+  // Tipo escolhido tocando no botão; null = deixar o atalho (ou "tarefa") decidir.
+  const [tipoEscolhido, setTipoEscolhido] = useState<TipoItem | null>(null)
   const [prioridadeEscolhida, setPrioridadeEscolhida] = useState(false)
   const [texto, setTexto] = useState('')
   const [horario, setHorario] = useState('')
   const [dia, setDia] = useState('')
   const campo = useRef<HTMLInputElement>(null)
 
-  // O atalho digitado aparece na hora nos botões de símbolo.
-  const atalho = interpretarAtalho(texto)
-  const tipo = atalho.tipo ?? tipoEscolhido
+  // O atalho digitado aparece na hora nos botões de símbolo. Se a pessoa tocar
+  // num botão diferente do atalho, o botão vence e o texto fica como foi digitado.
+  const automatico = interpretarAtalho(texto)
+  const botaoVence = tipoEscolhido !== null && automatico.tipo !== undefined && automatico.tipo !== tipoEscolhido
+  const atalho = botaoVence ? interpretarAtalho(texto, { ignorarTipo: true }) : automatico
+  const tipo: TipoItem = tipoEscolhido ?? atalho.tipo ?? 'tarefa'
   const prioridade = prioridadeEscolhida || atalho.prioridade
 
   async function adicionar(e: FormEvent) {
@@ -50,7 +54,7 @@ export function AdicionarItem({ lista, dica = 'Anotar…  ( - nota · o evento )
     setTexto('')
     setHorario('')
     setDia('')
-    setTipoEscolhido('tarefa')
+    setTipoEscolhido(null)
     setPrioridadeEscolhida(false)
     campo.current?.focus()
   }

@@ -125,21 +125,22 @@ function Celula({ habito, dia, hoje, registro, aoAbrirQuantidade }: PropsCelula)
       : `${formatarNumero(registro?.quantidade ?? 0)} de ${formatarNumero(habito.meta ?? 0)} ${habito.unidade ?? ''}`
 
   return (
+    // O botão ocupa a célula inteira (área de toque maior); o quadradinho fica dentro.
     <button
       type="button"
-      className="celula"
-      data-estado={estado}
+      className="celula-toque"
       disabled={futuro}
       aria-label={`${habito.nome}, ${formatarDiaCurto(dia)}: ${descricao}`}
       aria-pressed={habito.tipo === 'check' ? ok : undefined}
-      style={{ '--fracao': fracao } as CSSProperties}
       onClick={() => (habito.tipo === 'check' ? alternarCheck(habito.id, dia) : aoAbrirQuantidade(habito, dia))}
     >
-      {ok && (
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="m3 8.5 3.2 3L13 4.5" />
-        </svg>
-      )}
+      <span className="celula" data-estado={estado} style={{ '--fracao': fracao } as CSSProperties}>
+        {ok && (
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="m3 8.5 3.2 3L13 4.5" />
+          </svg>
+        )}
+      </span>
     </button>
   )
 }

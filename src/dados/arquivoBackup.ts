@@ -15,14 +15,17 @@ export async function salvarArquivoBackup(): Promise<ResultadoBackup> {
   const arquivo = new File([texto], nome, { type: 'application/json' })
 
   const ehCelular = window.matchMedia('(pointer: coarse)').matches
+  let compartilhou = false
   if (ehCelular && navigator.canShare?.({ files: [arquivo] })) {
     try {
       await navigator.share({ files: [arquivo], title: 'Backup do Bullet Journal' })
+      compartilhou = true
     } catch (erro) {
       if (erro instanceof DOMException && erro.name === 'AbortError') return 'cancelado'
-      throw erro
+      // Outro erro (ex.: o Safari recusou o compartilhar): plano B é baixar o arquivo.
     }
-  } else {
+  }
+  if (!compartilhou) {
     const url = URL.createObjectURL(arquivo)
     const link = document.createElement('a')
     link.href = url
